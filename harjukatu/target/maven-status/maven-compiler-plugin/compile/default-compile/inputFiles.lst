@@ -1,0 +1,12 @@
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/web/Application.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/domain/Post.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/jdbc/SpringConfiguration.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/web/controller/Reply.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/domain/Menu.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/repository/HarjukatuDAOImpl.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/domain/delegate/HarjukatuDelegate.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/repository/HarjukatuDAO.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/domain/MenuItem.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/web/controller/HarjukatuController.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/domain/delegate/HarjukatuDelegateImpl.java
+/home/esa/NetBeansProjects/harjukatu/harjukatu/src/main/java/fi/dy/potkonen/harjukatu/domain/Harjukatu.java

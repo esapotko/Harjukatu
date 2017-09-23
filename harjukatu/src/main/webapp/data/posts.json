@@ -1,0 +1,39 @@
+[
+{ 
+"title":"Angular", 
+"url":"https://www.w3schools.com/angular/",
+"banner":"https://www.w3schools.com/angular/pic_angular.jpg",
+"description":"AngularJS is a JavaScript framework. It is a library written in JavaScript."
+}, 
+{ 
+"title":"Thymeleaf", 
+"url":"http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html",
+"banner":"http://www.thymeleaf.org/doc/images/thymeleaf.png",
+"description":"Thymeleaf is a modern server-side Java template engine for both web and standalone environments."
+}, 
+{ 
+"title":"Oauth2", 
+"url":"http://www.tutorialspoint.com/oauth2.0/",
+"banner":"https://www.tutorialspoint.com/oauth2.0/images/oauth-2.jpg",
+"description":"OAuth2.0 is an open authorization protocol, which allows accessing the resources of the resource owner."
+}, 
+{ 
+"title":"Spring Boot", 
+"url":"https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-first-application.html",
+"banner":"img/lataus.png",
+"description":"Developing your first Spring Boot application"
+}, 
+{ 
+"title":"Spring Boot", 
+"url":"https://spring.io/blog/2014/03/07/deploying-spring-boot-applications",
+"banner":"img/lataus.png",
+"description":"Deploying Spring Boot Applications"
+}, 
+{ 
+"title":"Docker", 
+"url":"https://www.digitalocean.com/community/tutorials/docker-explained-how-to-create-docker-containers-running-memcached",
+"banner":"https://www.docker.com/sites/default/files/whale_0.png",
+"description":"How To Create Docker Containers Running Memcached"
+}
+]
+
