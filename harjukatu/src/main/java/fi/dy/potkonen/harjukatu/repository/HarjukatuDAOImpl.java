@@ -36,6 +36,7 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
                 mi.setTitle(rs.getString("TITLE"));
                 mi.setAction(rs.getString("ACTION"));
                 mi.setDescription(rs.getString("DESCRIPTION"));
+                mi.setTarget(rs.getString("TARGET"));
                 return mi;
             }
             

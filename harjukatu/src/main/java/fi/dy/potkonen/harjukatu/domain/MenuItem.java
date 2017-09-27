@@ -15,6 +15,7 @@ public class MenuItem {
     String Description;
     String Action;
     String Image;
+    String Target;
 
     public Integer getId() {
         return id;
@@ -55,4 +56,13 @@ public class MenuItem {
     public void setImage(String Image) {
         this.Image = Image;
     }
+
+    public String getTarget() {
+        return Target;
+    }
+
+    public void setTarget(String Target) {
+        this.Target = Target;
+    }
+    
 }
