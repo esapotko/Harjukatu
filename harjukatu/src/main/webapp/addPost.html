@@ -29,6 +29,7 @@
                     <form name="addPostForm" ng-submit="addPost(addPostForm.$valid)" novalidate="false"> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
                         <div id="messages" ng-show="poststatus == 'OK'">{{ message }}</div>
 
+                        <div id="errors" ng-show="poststatus != 'OK'" class="help-block">{{ message }}</div>
                         <!-- TITLE -->
                         <div class="form-group" ng-class="{ 'has-error' : addPostForm.title.$invalid && !addPostForm.title.$pristine }">
                             <label>Title</label>
