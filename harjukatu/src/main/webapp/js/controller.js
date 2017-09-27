@@ -52,8 +52,14 @@ harjukatuApp.controller('postController', function($scope, $http) {
         
         $http.post('/api/add',$scope.post)
         .then(function(response) {
-            console.log('post',response);
-            $scope.message = response.data.message;
+            $scope.poststatus =response.data.type;
+            console.log('status',$scope.poststatus);
+            
+            if($scope.poststatus == "OK") {
+                $scope.message = response.data.message;
+            } else {
+                $scope.message = "Error happened";
+            }
     
         })
         .catch(function (data) {

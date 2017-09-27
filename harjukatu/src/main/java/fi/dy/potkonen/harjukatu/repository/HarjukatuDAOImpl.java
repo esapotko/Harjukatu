@@ -96,4 +96,9 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
         });
         return list;
     }
+
+    @Override
+    public void addPost(Post post) {
+         System.out.println("addPost("+post.getDescription()+")");
+    }
 }

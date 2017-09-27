@@ -49,5 +49,10 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     public List<Post> getNewPosts() {
         return getHarjukatuDAO().getNewPosts();
     }
+
+    @Override
+    public void addPost(Post post) {
+        getHarjukatuDAO().addPost(post);
+    }
     
 }

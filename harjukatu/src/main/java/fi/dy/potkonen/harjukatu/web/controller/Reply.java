@@ -17,6 +17,7 @@ public class Reply {
     
     public Reply(Harjukatu.MESSAGE msg, String message) {
         type = msg;
+        this.message = message;
     }
     
     public String toString() {

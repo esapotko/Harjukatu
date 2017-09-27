@@ -68,6 +68,7 @@ public class HarjukatuController {
     public Reply newPost( @RequestBody Post post )   {		
         System.out.println("addPost("+post+")");
 
+        hd.addPost(post);
         return new Reply(Harjukatu.MESSAGE.OK, "Post With : " + post.getDescription());
     }
 }
