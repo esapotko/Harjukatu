@@ -30,12 +30,12 @@ public class SpringConfiguration {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        //MySQL database we are using
-        System.out.println("Using user["+user+"]");
+        //MySQL database 
+        System.out.println("*********** Using user["+user+"] **************");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/potkonen?useSSL=false");//change url
-        dataSource.setUsername(user);//change userid
-        dataSource.setPassword(password);//change pwd
+        dataSource.setUrl("jdbc:mysql://localhost:3306/potkonen?useSSL=false");
+        dataSource.setUsername(user);
+        dataSource.setPassword(password);
         return dataSource;
     }    
     @Bean
