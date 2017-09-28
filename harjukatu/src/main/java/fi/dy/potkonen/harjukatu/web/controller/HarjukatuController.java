@@ -12,12 +12,13 @@ import fi.dy.potkonen.harjukatu.domain.delegate.HarjukatuDelegate;
 import fi.dy.potkonen.harjukatu.jdbc.SpringConfiguration;
 import io.swagger.annotations.Api;
 import java.util.List;
+import org.apache.log4j.Logger;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(value="harjukatu", description="Operations pertaining to Harjukatu Site")
 public class HarjukatuController {
+    final static Logger logger = Logger.getLogger(HarjukatuController.class);
     HarjukatuDelegate hd;
 
     public HarjukatuController() {
@@ -39,6 +41,8 @@ public class HarjukatuController {
     @RequestMapping(value="/api/menu",
         method={RequestMethod.GET})
     List<MenuItem> menu() {
+        logger.info("menu "+hd.getTopMenu()+")");
+        
         return hd.getTopMenu();
     }
     
@@ -51,21 +55,22 @@ public class HarjukatuController {
     @RequestMapping(value="/api/newposts",
         method={RequestMethod.GET})
     List<Post> newposts() {
-        System.out.println("newposts"+hd.getNewPosts()+")");
+        logger.info("newposts"+hd.getNewPosts()+")");
+        
         return hd.getNewPosts();
     }
     
     @RequestMapping(value="/api/posts/{index}/del",
         method={RequestMethod.POST,RequestMethod.GET})
     List<Post> delPost(@PathVariable int index) {
-        System.out.println("delPost("+index+")");
+        logger.info("delPost("+index+")");
 
         return hd.removePost(index);
     }
     
     @RequestMapping(value = "/api/add", method = RequestMethod.POST)	
     public Reply newPost( @RequestBody Post post )   {		
-        System.out.println("addPost("+post+")");
+        logger.info("addPost("+post+")");
 
         hd.addPost(post);
         return new Reply(Harjukatu.MESSAGE.OK, "Post With : " + post.getDescription());
