@@ -54,5 +54,14 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     public void addPost(Post post) {
         getHarjukatuDAO().addPost(post);
     }
+
+    @Override
+    public List<Post> removePost(int key) {
+        getHarjukatuDAO().removePost(key);
+        List<Post> all = getAllPosts();
+        // When implemented. Remove following
+        all.remove(key);
+        return all;
+    }
     
 }

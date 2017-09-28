@@ -59,9 +59,8 @@ public class HarjukatuController {
         method={RequestMethod.POST,RequestMethod.GET})
     List<Post> delPost(@PathVariable int index) {
         System.out.println("delPost("+index+")");
-        List<Post> all = hd.getAllPosts();
-        all.remove(index);
-        return all;
+
+        return hd.removePost(index);
     }
     
     @RequestMapping(value = "/api/add", method = RequestMethod.POST)	

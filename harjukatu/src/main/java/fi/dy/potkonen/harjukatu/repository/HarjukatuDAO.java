@@ -24,4 +24,6 @@ public interface HarjukatuDAO {
     List<Post> getAllPosts();
     
     void addPost( Post post );
+    
+    void removePost(long key);
 }

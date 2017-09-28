@@ -25,6 +25,8 @@ public interface HarjukatuDelegate {
 
     void addPost( Post post );
     
+    List<Post> removePost(int key);
+    
     HarjukatuDAO getHarjukatuDAO();
 
     void setHarjukatuDAO(HarjukatuDAO harjukatuDAO);

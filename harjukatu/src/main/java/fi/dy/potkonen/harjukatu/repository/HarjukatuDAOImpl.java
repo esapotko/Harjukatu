@@ -102,4 +102,9 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
     public void addPost(Post post) {
          System.out.println("addPost("+post.getDescription()+")");
     }
+
+    @Override
+    public void removePost(long key) {
+         System.out.println("removePost("+ key +")");
+    }
 }
