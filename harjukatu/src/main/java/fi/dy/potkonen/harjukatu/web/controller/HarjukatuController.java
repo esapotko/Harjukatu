@@ -12,7 +12,8 @@ import fi.dy.potkonen.harjukatu.domain.delegate.HarjukatuDelegate;
 import fi.dy.potkonen.harjukatu.jdbc.SpringConfiguration;
 import io.swagger.annotations.Api;
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(value="harjukatu", description="Operations pertaining to Harjukatu Site")
 public class HarjukatuController {
-    final static Logger logger = Logger.getLogger(HarjukatuController.class);
+    private static Logger logger = LoggerFactory.getLogger("Harjukatu");
     HarjukatuDelegate hd;
 
     public HarjukatuController() {
