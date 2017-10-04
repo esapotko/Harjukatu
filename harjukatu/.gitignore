@@ -4,3 +4,6 @@
 !target/easyb/*
 target/
 *~
+# output from nohup
+nohup.out
+
