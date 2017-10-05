@@ -62,7 +62,8 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
         // When implemented. Remove following
         for(Post p : all) {
             if(key == p.getId()) {
-                all.remove(key);
+                all.remove(p);
+                break;
             }
         }
         return all;
