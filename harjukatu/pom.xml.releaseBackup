@@ -4,7 +4,7 @@
 
     <groupId>fi.dy.potkonen</groupId>
     <artifactId>harjukatu</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <name>harjukatu</name>
 
@@ -20,8 +20,7 @@
     <scm>        
         <connection>scm:git:https://github.com/esapotko/Harjukatu</connection>
         <developerConnection>scm:git:https://github.com/esapotko/Harjukatu</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
    
     <dependencies>
         <dependency>
