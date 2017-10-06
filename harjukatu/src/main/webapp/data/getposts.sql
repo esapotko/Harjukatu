@@ -5,6 +5,6 @@ SELECT
 FROM
     Posts
 WHERE
-    Priority > iPRIORITY
+    Priority = iPRIORITY
 ORDER BY ID;
 END
