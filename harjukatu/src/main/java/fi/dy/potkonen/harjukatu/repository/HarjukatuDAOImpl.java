@@ -6,16 +6,20 @@
 package fi.dy.potkonen.harjukatu.repository;
 
 
+import fi.dy.potkonen.harjukatu.domain.HarjukatuUtil;
+import static fi.dy.potkonen.harjukatu.domain.HarjukatuUtil.mapPostItems;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,7 +28,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class HarjukatuDAOImpl implements HarjukatuDAO {
-    private static Logger logger = LoggerFactory.getLogger("Harjukatu");
+        private static Logger logger = LoggerFactory.getLogger("Harjukatu");
     private JdbcTemplate jdbcTemplate;
     
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
@@ -32,74 +36,49 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
     }
     
     public List<MenuItem> getTopMenu(){
-        String sql = "select * from MenuItem where Position = 'Top' ";
-        List<MenuItem> list = jdbcTemplate.query(sql, new RowMapper<MenuItem>(){
- 
-            public MenuItem mapRow(ResultSet rs, int rownum) throws SQLException {
-                MenuItem mi = new MenuItem();
-                mi.setId(rs.getInt("ID"));
-                mi.setTitle(rs.getString("TITLE"));
-                mi.setAction(rs.getString("ACTION"));
-                mi.setDescription(rs.getString("DESCRIPTION"));
-                mi.setTarget(rs.getString("TARGET"));
-                return mi;
-            }
-            
-        });
+        List<MenuItem> list = new ArrayList<MenuItem>();
+        try {
+            String sql = "{call getTopMenu()}";
+            Connection connection = jdbcTemplate.getDataSource().getConnection();
+            CallableStatement cs = connection.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            list = HarjukatuUtil.mapMenuItems(rs);
+        } catch (SQLException ex) {
+            logger.error("", ex);
+        }
         return list;
     }    
     public List<Post> getAllPosts(){
-        String sql = "select * from Posts where Priority > '1' order by ID";
-        List<Post> list = jdbcTemplate.query(sql, new RowMapper<Post>(){
- 
-            public Post mapRow(ResultSet rs, int rownum) throws SQLException {
-                Post mi = new Post();
-                mi.setId(rs.getInt("ID"));
-                mi.setTitle(rs.getString("TITLE"));
-                mi.setUrl(rs.getString("URL"));
-                mi.setDescription(rs.getString("DESCRIPTION"));
-                mi.setBanner(rs.getString("BANNER"));
-                return mi;
-            }
-            
-        });
+        List<Post> list = new ArrayList<Post>();
+        try {
+            String sql = "{call getPosts(0)}";
+            Connection connection = jdbcTemplate.getDataSource().getConnection();
+            CallableStatement cs = connection.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            list = HarjukatuUtil.mapPostItems(rs);
+        } catch (SQLException ex) {
+            logger.error("", ex);
+        }
         return list;
     }    
 
     @Override
     public List<MenuItem> getLeftMenu() {
-        String sql = "select * from MenuItemn where Position = 'Left' ";
-        List<MenuItem> list = jdbcTemplate.query(sql, new RowMapper<MenuItem>(){
- 
-            public MenuItem mapRow(ResultSet rs, int rownum) throws SQLException {
-                MenuItem mi = new MenuItem();
-                mi.setId(rs.getInt("ID"));
-                mi.setTitle(rs.getString("TITLE"));
-                mi.setAction(rs.getString("ACTION"));
-                mi.setDescription(rs.getString("DESCRIPTION"));
-                return mi;
-            }
-            
-        });
-        return list;
-    }
+        return null;
+   }
 
     @Override
     public List<Post> getNewPosts() {
-        String sql = "select * from Posts where Priority = '1' order by ID";
-        List<Post> list = jdbcTemplate.query(sql, new RowMapper<Post>(){
- 
-            public Post mapRow(ResultSet rs, int rownum) throws SQLException {
-                Post mi = new Post();
-                mi.setId(rs.getInt("ID"));
-                mi.setTitle(rs.getString("TITLE"));
-                mi.setUrl(rs.getString("URL"));
-                mi.setDescription(rs.getString("DESCRIPTION"));
-                mi.setBanner(rs.getString("BANNER"));
-                return mi;
-            }
-            
-        });
+        List<Post> list = new ArrayList<Post>();
+        try {
+            String sql = "{call getPosts(1)}";
+            Connection connection = jdbcTemplate.getDataSource().getConnection();
+            CallableStatement cs = connection.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            list = mapPostItems(rs);
+        } catch (SQLException ex) {
+            logger.error("", ex);
+        }
         return list;
     }
 
