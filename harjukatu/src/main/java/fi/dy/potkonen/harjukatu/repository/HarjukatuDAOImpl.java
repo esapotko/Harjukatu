@@ -7,7 +7,6 @@ package fi.dy.potkonen.harjukatu.repository;
 
 
 import fi.dy.potkonen.harjukatu.domain.HarjukatuUtil;
-import static fi.dy.potkonen.harjukatu.domain.HarjukatuUtil.mapPostItems;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import java.sql.CallableStatement;
@@ -37,29 +36,19 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
     
     public List<MenuItem> getTopMenu(){
         List<MenuItem> list = new ArrayList<MenuItem>();
+        String sql = "{call getTopMenu()}";
         try {
-            String sql = "{call getTopMenu()}";
             Connection connection = jdbcTemplate.getDataSource().getConnection();
             CallableStatement cs = connection.prepareCall(sql);
             ResultSet rs = cs.executeQuery();
             list = HarjukatuUtil.mapMenuItems(rs);
         } catch (SQLException ex) {
-            logger.error("", ex);
+            logger.error("Failed sql["+sql+"]", ex);
         }
         return list;
     }    
     public List<Post> getAllPosts(){
-        List<Post> list = new ArrayList<Post>();
-        try {
-            String sql = "{call getPosts(0)}";
-            Connection connection = jdbcTemplate.getDataSource().getConnection();
-            CallableStatement cs = connection.prepareCall(sql);
-            ResultSet rs = cs.executeQuery();
-            list = HarjukatuUtil.mapPostItems(rs);
-        } catch (SQLException ex) {
-            logger.error("", ex);
-        }
-        return list;
+        return getPostsByPriority(0);
     }    
 
     @Override
@@ -69,17 +58,7 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
 
     @Override
     public List<Post> getNewPosts() {
-        List<Post> list = new ArrayList<Post>();
-        try {
-            String sql = "{call getPosts(1)}";
-            Connection connection = jdbcTemplate.getDataSource().getConnection();
-            CallableStatement cs = connection.prepareCall(sql);
-            ResultSet rs = cs.executeQuery();
-            list = mapPostItems(rs);
-        } catch (SQLException ex) {
-            logger.error("", ex);
-        }
-        return list;
+        return getPostsByPriority(1);
     }
 
     @Override
@@ -90,5 +69,24 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
     @Override
     public void removePost(long key) {
         logger.info("removePost("+ key +")");
+    }
+
+    @Override
+    public List<Post> getOutPosts() {
+        logger.info("Posts from add form");
+        return getPostsByPriority(3);
+    }
+    private List<Post> getPostsByPriority(int priority) {
+        List<Post> list = new ArrayList<Post>();
+        String sql = "{call getPosts("+priority+")}";
+        try {
+            Connection connection = jdbcTemplate.getDataSource().getConnection();
+            CallableStatement cs = connection.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            list = HarjukatuUtil.mapPostItems(rs);
+        } catch (SQLException ex) {
+            logger.error("Failed sql["+sql+"]", ex);
+        }
+        return list;
     }
 }

@@ -61,6 +61,14 @@ public class HarjukatuController {
         return hd.getNewPosts();
     }
     
+    @RequestMapping(value="/api/outerposts",
+        method={RequestMethod.GET})
+    List<Post> outerposts() {
+        logger.info("outerposts"+hd.getOutPosts()+")");
+        
+        return hd.getOutPosts();
+    }
+
     @RequestMapping(value="/api/posts/{index}/del",
         method={RequestMethod.POST,RequestMethod.GET})
     List<Post> delPost(@PathVariable int index) {

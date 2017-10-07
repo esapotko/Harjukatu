@@ -68,5 +68,9 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
         }
         return all;
     }
+
+    @Override
+    public List<Post> getOutPosts() {
+        return getHarjukatuDAO().getOutPosts();    }
     
 }

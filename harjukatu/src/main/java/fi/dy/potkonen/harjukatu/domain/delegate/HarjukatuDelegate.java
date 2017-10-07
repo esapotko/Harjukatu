@@ -23,6 +23,8 @@ public interface HarjukatuDelegate {
     
     List<Post> getNewPosts();
 
+    List<Post> getOutPosts();
+
     void addPost( Post post );
     
     List<Post> removePost(int key);

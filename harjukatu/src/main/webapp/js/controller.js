@@ -23,6 +23,13 @@ harjukatuApp.controller('harjukatuCtrl', function($scope, $http) {
     .catch(function (data) {
         console.log('get posts error',data)
     });
+    $http.get("/api/outerposts")
+    .then(function(response) {
+        $scope.outerposts = response.data; 
+    })
+    .catch(function (data) {
+        console.log('get posts error',data)
+    });
     $scope.removeItem = function (idx) {
         var url = "/api/posts/"+idx+"/del";
         $http.get(url)
