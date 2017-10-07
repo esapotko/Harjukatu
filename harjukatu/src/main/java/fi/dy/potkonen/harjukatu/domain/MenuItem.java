@@ -64,5 +64,10 @@ public class MenuItem {
     public void setTarget(String Target) {
         this.Target = Target;
     }
+
+    @Override
+    public String toString() {
+        return "MenuItem{" + "id=" + id + ", Title=" + Title + ", Description=" + Description + ", Action=" + Action + ", Image=" + Image + ", Target=" + Target + '}';
+    }
     
 }

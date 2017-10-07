@@ -56,4 +56,10 @@ public class Post {
     public void setBanner(String Banner) {
         this.Banner = Banner;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" + "id=" + id + ", Title=" + Title + ", Url=" + Url + ", Description=" + Description + ", Banner=" + Banner + '}';
+    }
+    
 }

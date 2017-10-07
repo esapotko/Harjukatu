@@ -30,6 +30,10 @@ public class Menu {
     public void setItems(List<MenuItem> items) {
         this.items = items;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Menu{" + "name=" + name + ", items=" + items + '}';
+    }
+
 }

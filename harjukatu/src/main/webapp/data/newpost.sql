@@ -1,0 +1,4 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `newPost`(IN iPRORITY INT)
+BEGIN
+
+END
