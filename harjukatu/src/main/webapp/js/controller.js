@@ -59,7 +59,7 @@ harjukatuApp.controller('postController', function($scope, $http) {
         
         $http.post('/api/add',$scope.post)
         .then(function(response) {
-            $scope.poststatus =response.data.type;
+            $scope.poststatus = response.data.type;
             console.log('status',$scope.poststatus);
             
             if($scope.poststatus == "OK") {
