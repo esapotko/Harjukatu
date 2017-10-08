@@ -42,8 +42,6 @@ public class HarjukatuController {
     @RequestMapping(value="/api/menu",
         method={RequestMethod.GET})
     List<MenuItem> menu() {
-        logger.info("menu "+hd.getTopMenu()+")");
-        
         return hd.getTopMenu();
     }
     
@@ -54,7 +52,7 @@ public class HarjukatuController {
     }
     
     @RequestMapping(value="/api/posts/{index}/del",
-        method={RequestMethod.POST,RequestMethod.GET})
+        method={RequestMethod.POST, RequestMethod.GET})
     List<Post> delPost(@PathVariable int index) {
         logger.info("delPost("+index+")");
 
