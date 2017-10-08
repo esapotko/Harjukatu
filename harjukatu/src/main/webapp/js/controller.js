@@ -9,23 +9,23 @@ harjukatuApp.controller('harjukatuCtrl', function($scope, $http) {
     .catch(function (data) {
         console.log('get menu error',data)
     });
-    $http.get("/api/posts")
+    $http.get("/api/posts/0")
     .then(function(response) {
         $scope.posts = response.data; 
     })
     .catch(function (data) {
         console.log('get posts error',data)
     });
-    $http.get("/api/newposts")
+    $http.get("/api/posts/1")
     .then(function(response) {
         $scope.newposts = response.data; 
     })
     .catch(function (data) {
         console.log('get posts error',data)
     });
-    $http.get("/api/outerposts")
+    $http.get("/api/posts/2")
     .then(function(response) {
-        $scope.outerposts = response.data; 
+        $scope.addedposts = response.data; 
     })
     .catch(function (data) {
         console.log('get posts error',data)

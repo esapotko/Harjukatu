@@ -15,14 +15,13 @@
         <td><img src="{{ post.banner }}" alt="" height="42" width="45" /></td>
         <td>{{ post.title }}</td>
         <td><a href="{{ post.url }}" target="_blank">{{ post.description }}</a></td>
-        <td><button type="button" class="btn btn-primary" ng-click="removeItem( post.id )">Remove</button></td>
     </tr>
 </table>
 
 <h1>Suggested topics (From add link):</h1>
                     
 <table class="table">
-    <tr ng-repeat="post in outerposts">
+    <tr ng-repeat="post in addedposts">
         <td><img src="{{ post.banner }}" alt="" height="42" width="45" /></td>
         <td>{{ post.title }}</td>
         <td><a href="{{ post.url }}" target="_blank">{{ post.description }}</a></td>

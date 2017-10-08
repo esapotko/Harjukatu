@@ -19,11 +19,7 @@ public interface HarjukatuDAO {
 
     List<MenuItem> getLeftMenu();
 
-    List<Post> getNewPosts();
-
-    List<Post> getAllPosts();
-    
-    List<Post> getOutPosts();
+    List<Post> getPosts(int level);
 
     void addPost( Post post );
     

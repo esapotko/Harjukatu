@@ -36,18 +36,13 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     }
 
     @Override
-    public List<Post> getAllPosts() {
-        return getHarjukatuDAO().getAllPosts();
+    public List<Post> getPosts(int level) {
+        return getHarjukatuDAO().getPosts(level);
     }
 
     @Override
     public List<MenuItem> getLeftMenu() {
         return getHarjukatuDAO().getLeftMenu();
-    }
-
-    @Override
-    public List<Post> getNewPosts() {
-        return getHarjukatuDAO().getNewPosts();
     }
 
     @Override
@@ -58,7 +53,7 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     @Override
     public List<Post> removePost(int key) {
         getHarjukatuDAO().removePost(key);
-        List<Post> all = getAllPosts();
+        List<Post> all = getPosts(0);
         // When implemented. Remove following
         for(Post p : all) {
             if(key == p.getId()) {
@@ -68,9 +63,4 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
         }
         return all;
     }
-
-    @Override
-    public List<Post> getOutPosts() {
-        return getHarjukatuDAO().getOutPosts();    }
-    
 }

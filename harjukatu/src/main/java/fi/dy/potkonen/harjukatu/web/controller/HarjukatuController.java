@@ -47,28 +47,12 @@ public class HarjukatuController {
         return hd.getTopMenu();
     }
     
-    @RequestMapping(value="/api/posts",
+    @RequestMapping(value="/api/posts/{level}",
         method={RequestMethod.GET})
-    List<Post> posts() {
-        return hd.getAllPosts();
+    List<Post> posts(@PathVariable int level) {
+        return hd.getPosts(level);
     }
     
-    @RequestMapping(value="/api/newposts",
-        method={RequestMethod.GET})
-    List<Post> newposts() {
-        logger.info("newposts"+hd.getNewPosts()+")");
-        
-        return hd.getNewPosts();
-    }
-    
-    @RequestMapping(value="/api/outerposts",
-        method={RequestMethod.GET})
-    List<Post> outerposts() {
-        logger.info("outerposts"+hd.getOutPosts()+")");
-        
-        return hd.getOutPosts();
-    }
-
     @RequestMapping(value="/api/posts/{index}/del",
         method={RequestMethod.POST,RequestMethod.GET})
     List<Post> delPost(@PathVariable int index) {

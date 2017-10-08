@@ -19,12 +19,8 @@ public interface HarjukatuDelegate {
 
     List<MenuItem> getLeftMenu();
 
-    List<Post> getAllPosts();
+    List<Post> getPosts(int level);
     
-    List<Post> getNewPosts();
-
-    List<Post> getOutPosts();
-
     void addPost( Post post );
     
     List<Post> removePost(int key);

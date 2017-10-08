@@ -47,8 +47,8 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
         }
         return list;
     }    
-    public List<Post> getAllPosts(){
-        return getPostsByPriority(0);
+    public List<Post> getPosts(int level){
+        return getPostsByPriority(level);
     }    
 
     @Override
@@ -57,13 +57,22 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
    }
 
     @Override
-    public List<Post> getNewPosts() {
-        return getPostsByPriority(1);
-    }
-
-    @Override
     public void addPost(Post post) {
         logger.info("addPost("+post.getDescription()+")");
+        String sql = "{call newPost(?,?,?,?,?,?)}";
+        try {
+            Connection connection = jdbcTemplate.getDataSource().getConnection();
+            CallableStatement cs = connection.prepareCall(sql);
+            cs.setInt(1, 2); // Priority
+            cs.setString(2, post.getTitle());
+            cs.setString(3, post.getUrl());
+            cs.setString(4, post.getDescription());
+            cs.setString(5, post.getBanner());
+            cs.setInt(6, 1); // Visibility
+            cs.execute();
+        } catch (SQLException ex) {
+            logger.error("Failed sql["+sql+"]", ex);
+        }
     }
 
     @Override
@@ -71,11 +80,6 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
         logger.info("removePost("+ key +")");
     }
 
-    @Override
-    public List<Post> getOutPosts() {
-        logger.info("Posts from add form");
-        return getPostsByPriority(3);
-    }
     private List<Post> getPostsByPriority(int priority) {
         List<Post> list = new ArrayList<Post>();
         String sql = "{call getPosts("+priority+")}";
