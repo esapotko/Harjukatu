@@ -34,7 +34,7 @@ harjukatuApp.controller('harjukatuCtrl', function($scope, $http) {
         var url = "/api/posts/"+idx+"/del";
         $http.get(url)
         .then(function(response) {
-            $scope.posts = response.data; 
+            $scope.addedposts = response.data; 
         })
         .catch(function (data) {
             console.log('del posts error',url)

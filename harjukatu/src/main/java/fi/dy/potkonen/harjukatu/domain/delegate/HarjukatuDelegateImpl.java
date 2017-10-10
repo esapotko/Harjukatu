@@ -53,7 +53,7 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     @Override
     public List<Post> removePost(int key) {
         getHarjukatuDAO().removePost(key);
-        List<Post> all = getPosts(0);
+        List<Post> all = getPosts(2);
         // When implemented. Remove following
         for(Post p : all) {
             if(key == p.getId()) {

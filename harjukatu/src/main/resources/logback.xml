@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true" scan="true" scanPeriod="30 seconds">
+<configuration debug="true" scan="false" scanPeriod="30 seconds">
  
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -27,7 +27,7 @@
         </encoder>
     </appender>
 	
-    <logger name="Harjukatu" level="debug" additivity="false">
+    <logger name="Harjukatu" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="SYSLOG" />
         <appender-ref ref="ROLLING" />
