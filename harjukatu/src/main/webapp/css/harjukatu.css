@@ -11,9 +11,19 @@ and open the template in the editor.
 ul.nav.div {
     white-space: nowrap;
     overflow-x: auto;
+    background-color: #E6E6FA;
 }
 
 ul.nav.div li {
     display: inline-block;
     float: none;
+}
+
+body {
+    background-image: url("/img/harjukatu.jpg");
+    background-size: cover;
+}
+
+table.BGC {
+    background-color: #FFFFFF;
 }
