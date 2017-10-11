@@ -11,7 +11,7 @@ and open the template in the editor.
 ul.nav.div {
     white-space: nowrap;
     overflow-x: auto;
-    background-color: #E6E6FA;
+    background-color: black;
 }
 
 ul.nav.div li {
@@ -24,6 +24,15 @@ body {
     background-size: cover;
 }
 
+h1, h2, h3, label {
+    color: black;
+    text-shadow: 2px 1px gray;
+}
+
 table.BGC {
     background-color: #FFFFFF;
+}
+
+p.help-block {
+    color: red;
 }

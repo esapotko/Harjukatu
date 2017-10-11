@@ -33,28 +33,28 @@
                         <div id="errors" ng-show="poststatus != 'OK'" class="help-block">{{ message }}</div>
                         <!-- TITLE -->
                         <div class="form-group" ng-class="{ 'has-error' : addPostForm.title.$invalid && !addPostForm.title.$pristine }">
-                            <label>Title</label>
+                            <h3>Title</h3>
                             <input type="text" name="title" class="form-control" ng-model="post.title" ng-required="true" />
                             <p ng-show="addPostForm.title.$invalid" class="help-block">Title is required.</p>
                         </div>
 
                         <!-- DESCRIPTION -->
                         <div class="form-group">
-                            <label>Description</label>
+                            <h3>Description</h3>
                             <input type="text" name="description" class="form-control" ng-model="post.description" ng-required="true" />
                             <p ng-show="addPostForm.description.$invalid" class="help-block">Description is required.</p>
                         </div>
 
                         <!-- URL -->
                         <div class="form-group">
-                            <label>Url</label>
+                            <h3>Url</h3>
                             <input type="url" name="url" class="form-control" ng-model="post.url" ng-required="true" />
                             <p ng-show="addPostForm.url.$invalid" class="help-block">Url is required.</p>
                         </div>
 
                         <!-- BANNER -->
                         <div class="form-group">
-                            <label>Banner</label>
+                            <h3>Banner</h3>
                             <input name="banner" class="form-control" ng-model="post.banner" ng-required="true" />
                             <p ng-show="addPostForm.banner.$invalid" class="help-block">Banner is required.</p>
                         </div>
