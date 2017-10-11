@@ -1,4 +1,4 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delPost`(IN iID int)
 BEGIN
-	DELETE FROM `potkonen`.`Posts` WHERE Id = iID;	
+	UPDATE potkonen.Posts SET Visible = '0' WHERE Id = iID;	
 END
