@@ -78,6 +78,14 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
     @Override
     public void removePost(long key) {
         logger.info("removePost("+ key +")");
+        String sql = "{call delPost("+key+")}";
+        try {
+            Connection connection = jdbcTemplate.getDataSource().getConnection();
+            CallableStatement cs = connection.prepareCall(sql);
+            int affected = cs.executeUpdate();
+        } catch (SQLException ex) {
+            logger.error("Failed sql["+sql+"]", ex);
+        }
     }
 
     private List<Post> getPostsByPriority(int priority) {

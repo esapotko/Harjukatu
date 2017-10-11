@@ -54,13 +54,6 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     public List<Post> removePost(int key) {
         getHarjukatuDAO().removePost(key);
         List<Post> all = getPosts(2);
-        // When implemented. Remove following
-        for(Post p : all) {
-            if(key == p.getId()) {
-                all.remove(p);
-                break;
-            }
-        }
         return all;
     }
 }

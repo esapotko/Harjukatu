@@ -8,7 +8,7 @@ CREATE TABLE `potkonen`.`Posts` (
   PRIMARY KEY (`ID`));
 SET SQL_SAFE_UPDATES = 0;
 SELECT * FROM potkonen.Posts;
-UPDATE potkonen.Posts SET Priority = '2';
+UPDATE potkonen.Posts SET VISIBLE = '1';
 DELETE FROM `potkonen`.`Posts` WHERE Id = 7;	
 select * from Posts where Priority = '1' order by ID;
 select * from Posts where Priority > '1' order by ID;
