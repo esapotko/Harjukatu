@@ -9,7 +9,7 @@
 - Loadbalancing. NGinx
 - Consolidated logging through syslog. Graylog, Elasticsearch, Mongo
 - Services managed by sysctl.
-
+## Location
 ![Harjukatu](harjukatu/src/main/webapp/img/hk-map.png?raw=true)
 
 
