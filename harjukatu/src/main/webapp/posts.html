@@ -1,24 +1,19 @@
-<h3>Waiting for implementation:</h3>
-                    
-<table class="table BGC">
-    <tr ng-repeat="post in newposts">
-        <td><img src="{{ post.banner }}" alt="" height="42" width="45"></td>
-        <td>{{ post.title }}</td>
-        <td><a href="{{ post.url }}" target="_blank">{{ post.description }}</a></td>
-    </tr>
-</table>
-
-<h3>Yesterday's topics (Done in this site):</h3>
+<h3>Do list:</h3>
                     
 <table class="table BGC">
     <tr ng-repeat="post in posts">
-        <td><img src="{{ post.banner }}" alt="" height="42" width="45" /></td>
+        <td><img src="{{ post.banner }}" alt="" height="42" width="45"></td>
         <td>{{ post.title }}</td>
-        <td><a href="{{ post.url }}" target="_blank">{{ post.description }}</a></td>
+        <td>
+            <a href="{{ post.url }}" target="_blank">{{ post.description }}</a>
+        </td>
+        <td>
+            <span class="glyphicon glyphicon-ok"></span>
+        </td>
     </tr>
 </table>
 
-<h3>Suggested topics (From add link):</h3>
+<h3>To Do:</h3>
                     
 <table class="table BGC">
     <tr ng-repeat="post in addedposts">
