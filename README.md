@@ -5,9 +5,9 @@
 - WorkBench
 ## Manageable server
 - MySQL
-- CI tools. Git, mvn, java
+- CI tools. Git, Maven, Java
 - Loadbalancing. NGinx
-- Consolidated logging through syslog. Graylog, elasticsearch, mongo
+- Consolidated logging through syslog. Graylog, Elasticsearch, Mongo
 - Services managed by sysctl.
 
 ![Harjukatu](harjukatu/src/main/webapp/img/hk-map.png?raw=true)
