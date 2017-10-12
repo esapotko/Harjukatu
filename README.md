@@ -1,6 +1,8 @@
 # [Harjukatu](http://potkonen.dy.fi/)
 # Web application and Linux server (Ubuntu) project at my home PC
 ## Dynamic web application. Just HTML/CSS/REST/SQL
+- NetBeans
+- WorkBench
 ## Manageable server
 - MySQL
 - CI tools. Git, mvn, java
