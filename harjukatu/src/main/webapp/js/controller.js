@@ -1,6 +1,9 @@
-var harjukatuApp = angular.module('harjukatuApp', ["ui.bootstrap"]);
-
-harjukatuApp.controller('harjukatuCtrl', function($scope, $http) {
+var HarjukatuApp = angular.module('HarjukatuApp', ["ui.bootstrap"]);
+// Main controller
+HarjukatuApp.controller('HarjukatuCtrl', function($scope, $http) {
+    /*
+     * Menu
+     */
     $scope.showModal = true;
     $http.get("/api/menu")
     .then(function(response) {
@@ -9,6 +12,9 @@ harjukatuApp.controller('harjukatuCtrl', function($scope, $http) {
     .catch(function (data) {
         console.log('get menu error',data)
     });
+    /*
+     * ToDo content
+     */
     $http.get("/api/posts/0")
     .then(function(response) {
         $scope.posts = response.data; 
@@ -30,6 +36,27 @@ harjukatuApp.controller('harjukatuCtrl', function($scope, $http) {
     .catch(function (data) {
         console.log('get posts error',data)
     });
+    /*
+     * Content
+     */
+    $scope.myInterval = 3000;
+    $scope.slides = [
+        {
+          image: 'http://lorempixel.com/400/200/'
+        },
+        {
+          image: 'http://lorempixel.com/400/200/food'
+        },
+        {
+          image: 'http://lorempixel.com/400/200/sports'
+        },
+        {
+          image: 'http://lorempixel.com/400/200/people'
+        }
+    ];    
+    /*
+     * Functionality
+     */
     $scope.removeItem = function (idx) {
         var url = "/api/posts/"+idx+"/del";
         $http.get(url)
@@ -42,8 +69,11 @@ harjukatuApp.controller('harjukatuCtrl', function($scope, $http) {
     }
 });
 
-// create angular controller
-harjukatuApp.controller('postController', function($scope, $http) {
+// Create another angular controller
+HarjukatuApp.controller('PostCtrl', function($scope, $http) {
+    /*
+     * Menu
+     */
     $scope.showModal = true;
     $http.get('/api/menu')
     .then(function(response) {
@@ -52,7 +82,9 @@ harjukatuApp.controller('postController', function($scope, $http) {
     .catch(function (data) {
         console.log('get menu error',data);
     });
-
+    /*
+     * Functionality
+     */
     $scope.addPost = function() {
 
         console.log('scope.formError =',$scope.formError);
