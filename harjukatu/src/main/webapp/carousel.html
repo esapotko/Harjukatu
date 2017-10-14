@@ -5,8 +5,11 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" ng-repeat="slide in slides">
-        <div class="item">
+    <div class="carousel-inner">
+        <div class="item active" ng-repeat-start="slide in slides" ng-if="$first">
+            <img src="{{slide.image}}" alt="{{slide.image}}">
+        </div>
+        <div class="item" ng-repeat-end ng-if="!$first">
             <img src="{{slide.image}}" alt="{{slide.image}}">
         </div>
     </div>
