@@ -5,9 +5,14 @@
  */
 package fi.dy.potkonen.harjukatu.domain.delegate;
 
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.ERROR;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
+import fi.dy.potkonen.harjukatu.web.controller.Reply;
+import fi.solita.clamav.ClamAVClient;
+import java.io.InputStream;
 import java.util.List;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -20,6 +25,8 @@ import org.springframework.stereotype.Service;
  
 @Service("harjukatuDelegate")
 public class HarjukatuDelegateImpl implements HarjukatuDelegate {
+    
+    
     private HarjukatuDAO harjukatuDAO;
 
     public HarjukatuDAO getHarjukatuDAO() {
@@ -55,5 +62,21 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
         getHarjukatuDAO().removePost(key);
         List<Post> all = getPosts(2);
         return all;
+    }
+
+    @Override
+    public Reply store(InputStream is) {
+        Reply ry = new Reply(OK,"");  
+        ClamAVClient cl = new ClamAVClient("localhost", 3310);
+        byte[] reply;
+        try {
+            reply = cl.scan(is);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not scan the input", e);
+        }
+        if (!ClamAVClient.isCleanReply(reply)) {
+            ry = new Reply(ERROR,"aaargh. Something was found");
+        }
+        return ry;
     }
 }

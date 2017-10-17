@@ -7,6 +7,8 @@ package fi.dy.potkonen.harjukatu.web.controller;
 
 import fi.dy.potkonen.harjukatu.domain.delegate.HarjukatuDelegate;
 import fi.dy.potkonen.harjukatu.jdbc.SpringConfiguration;
+import fi.solita.clamav.ClamAVClient;
+import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -22,20 +24,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 public class FileUploadController {
+
     private static Logger logger = LoggerFactory.getLogger("Harjukatu");
     HarjukatuDelegate hd;
 
     public FileUploadController() {
-        AnnotationConfigApplicationContext appContext = 
-        new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        AnnotationConfigApplicationContext appContext
+                = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         hd = appContext.getBean(HarjukatuDelegate.class);
     }
 
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-        RedirectAttributes redirectAttributes) {
-        logger.info("/upload "+file.getOriginalFilename());
-        //storageService.store(file);
+            RedirectAttributes redirectAttributes) throws IOException {
+        logger.info("/upload " + file.getOriginalFilename());
+
+        hd.store(file.getInputStream());
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 

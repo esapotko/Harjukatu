@@ -8,6 +8,8 @@ package fi.dy.potkonen.harjukatu.domain.delegate;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
+import fi.dy.potkonen.harjukatu.web.controller.Reply;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -28,5 +30,7 @@ public interface HarjukatuDelegate {
     HarjukatuDAO getHarjukatuDAO();
 
     void setHarjukatuDAO(HarjukatuDAO harjukatuDAO);
+    
+    Reply store(InputStream is);
     
 }
