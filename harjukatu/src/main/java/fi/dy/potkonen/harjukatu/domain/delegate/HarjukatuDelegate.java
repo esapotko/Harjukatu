@@ -9,6 +9,7 @@ import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
 import fi.dy.potkonen.harjukatu.web.controller.Reply;
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
@@ -31,6 +32,6 @@ public interface HarjukatuDelegate {
 
     void setHarjukatuDAO(HarjukatuDAO harjukatuDAO);
     
-    Reply store(InputStream is);
+    Reply store(String name, byte[] bytes) throws Exception;
     
 }

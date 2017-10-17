@@ -5,6 +5,7 @@
  */
 package fi.dy.potkonen.harjukatu.web.controller;
 
+import fi.dy.potkonen.harjukatu.domain.HarjukatuUtil;
 import fi.dy.potkonen.harjukatu.domain.delegate.HarjukatuDelegate;
 import fi.dy.potkonen.harjukatu.jdbc.SpringConfiguration;
 import java.io.IOException;
@@ -35,13 +36,13 @@ public class FileUploadController {
 
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) throws IOException {
+            RedirectAttributes redirectAttributes) throws Exception {
         logger.info("/upload " + file.getOriginalFilename());
 
-        Reply r = hd.store(file.getInputStream());
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
+        Reply r = hd.store(file.getOriginalFilename(), file.getBytes());
+        redirectAttributes.addFlashAttribute("message", r.getMessage()+ "!");
 
         return "redirect:/";
     }
+    
 }

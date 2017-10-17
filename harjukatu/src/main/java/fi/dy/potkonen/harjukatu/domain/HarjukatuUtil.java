@@ -5,10 +5,13 @@
  */
 package fi.dy.potkonen.harjukatu.domain;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -43,5 +46,10 @@ public class HarjukatuUtil {
         }
         return list;
     }
-    
+    public static File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException 
+    {
+        File convFile = new File( multipart.getOriginalFilename());
+        multipart.transferTo(convFile);
+        return convFile;
+    }    
 }
