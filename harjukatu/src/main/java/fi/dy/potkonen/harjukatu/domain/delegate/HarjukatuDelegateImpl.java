@@ -14,6 +14,8 @@ import fi.dy.potkonen.harjukatu.web.controller.Reply;
 import fi.solita.clamav.ClamAVClient;
 import java.io.InputStream;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ import org.springframework.stereotype.Service;
  
 @Service("harjukatuDelegate")
 public class HarjukatuDelegateImpl implements HarjukatuDelegate {
-    
+    private static Logger logger = LoggerFactory.getLogger("Harjukatu");
     
     private HarjukatuDAO harjukatuDAO;
 
@@ -75,7 +77,9 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
             throw new RuntimeException("Could not scan the input", e);
         }
         if (!ClamAVClient.isCleanReply(reply)) {
-            ry = new Reply(ERROR,"aaargh. Something was found");
+            String msg = "ClamAV Aaargh. Something was found";
+            ry = new Reply(ERROR,msg);
+            logger.warn(msg);
         }
         return ry;
     }
