@@ -14,9 +14,9 @@ import fi.dy.potkonen.harjukatu.web.controller.Reply;
 import fi.solita.clamav.ClamAVClient;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
+import org.apache.commons.imaging.Imaging;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,15 +73,20 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     @Override
     public Reply store(String name, byte[] bytes) throws Exception {
         Reply ry = new Reply(OK,"");  
-        ClamAVClient cl = new ClamAVClient("localhost", 3310);
+        ClamAVClient cl = new ClamAVClient("localhost", 3310, 50000);
+        cl.ping();
         byte[] reply = cl.scan(bytes);
 
         if (!ClamAVClient.isCleanReply(reply)) {
             String msg = "ClamAV. Something was found";
             ry = new Reply(ERROR,msg);
             logger.warn(msg);
+        } else {
+            InputStream in = new ByteArrayInputStream(bytes);
+            File f = new File("/home/esa/Kuvat/"+name);
+            FileUtils.copyInputStreamToFile(in,f);
+            logger.info("Copy file "+f.getAbsolutePath());
         }
-        FileUtils.copyInputStreamToFile(new ByteArrayInputStream(bytes), new File("/home/esa/Kuvat/"+name));
         return ry;
     }
 }

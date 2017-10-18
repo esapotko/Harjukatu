@@ -20,8 +20,8 @@
     <scm>        
         <connection>scm:git:https://github.com/esapotko/Harjukatu</connection>
         <developerConnection>scm:git:https://github.com/esapotko/Harjukatu</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
    
     <dependencies>
         <dependency>
@@ -71,9 +71,9 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/fi.solita.clamav/clamav-client -->
         <dependency>
-          <groupId>fi.solita.clamav</groupId>
-          <artifactId>clamav-client</artifactId>
-          <version>1.0.1</version>
+            <groupId>fi.solita.clamav</groupId>
+            <artifactId>clamav-client</artifactId>
+            <version>1.0.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
@@ -81,9 +81,13 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-imaging -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-imaging</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -92,5 +96,11 @@
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <repository>
+            <id>apache.snapshots</id>
+            <name>Apache Development Snapshot Repository</name>
+            <url>https://repository.apache.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>                     
 </project>
