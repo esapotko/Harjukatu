@@ -30,14 +30,13 @@
     </a>
 </div>
 <div class="tab-content">
-    <form method="POST" enctype="multipart/form-data" action="/api/upload">
+    <form method="POST" enctype="multipart/form-data" ng-submit="addFile()" id="fileUploadForm">
         <table class="table BGC">
             <tr>
                 <td><input type="file" name="file" class="file"/></td>
                 <td><input type="submit" class="btn btn-primary" value="Upload" />
-                    <div th:if="${message}">
-                        <h2 th:text="${message}"/>
-                    </div>
+                    <div id="messages" ng-show="poststatus == 'OK'">{{ message }}</div>
+                    <div id="errors" ng-show="poststatus != 'OK'" class="help-block">{{ message }}</div>
                 </td>
             </tr>
         </table>

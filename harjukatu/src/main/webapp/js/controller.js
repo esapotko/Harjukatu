@@ -67,6 +67,42 @@ HarjukatuApp.controller('HarjukatuCtrl', function($scope, $http) {
             console.log('del posts error',url)
         });
     }
+ 
+    $scope.addFile = function() {
+        // Get form
+        var form = $('#fileUploadForm')[0];
+        var data = new FormData(form);
+
+        data.append("CustomField", "This is some extra data, testing");
+
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/api/upload",
+            data: data,
+            //http://api.jquery.com/jQuery.ajax/
+            //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+            processData: false, //prevent jQuery from automatically transforming the data into a query string
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (response) {
+                $scope.poststatus = response.data.type;
+                console.log('status',$scope.poststatus);
+
+                if($scope.poststatus == "OK") {
+                    $scope.message = response.data.message;
+                } else {
+                    $scope.message = "Error happened";
+                }
+                console.log("SUCCESS : ", response);
+
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+            }
+       });
+    };
 });
 
 // Create another angular controller
