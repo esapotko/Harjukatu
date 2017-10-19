@@ -24,11 +24,17 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<div>
+<div class="tab-content">
     <form method="POST" enctype="multipart/form-data" action="/api/upload">
-        <table>
-                <tr><td><input type="file" name="file" class="file"/></td></tr>
-                <tr><td><input type="submit" class="btn btn-primary" value="Upload" /></td></tr>
+        <table class="table BGC">
+            <tr>
+                <td><input type="file" name="file" class="file"/></td>
+                <td><input type="submit" class="btn btn-primary" value="Upload" />
+                    <div th:if="${message}">
+                        <h2 th:text="${message}"/>
+                    </div>
+                </td>
+            </tr>
         </table>
     </form>
 </div>

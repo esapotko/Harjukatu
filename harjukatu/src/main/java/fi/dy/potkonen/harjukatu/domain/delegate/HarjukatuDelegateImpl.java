@@ -6,8 +6,10 @@
 package fi.dy.potkonen.harjukatu.domain.delegate;
 
 import fi.dy.potkonen.harjukatu.domain.Harjukatu;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.CLAMD;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.ERROR;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MINUTE;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
@@ -74,7 +76,7 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     @Override
     public Reply store(String name, byte[] bytes) throws Exception {
         Reply ry = new Reply(OK,"");  
-        ClamAVClient cl = new ClamAVClient("localhost", Harjukatu.CLAMD, Harjukatu.MINUTE);
+        ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
         cl.ping();
         byte[] reply = cl.scan(bytes);
 

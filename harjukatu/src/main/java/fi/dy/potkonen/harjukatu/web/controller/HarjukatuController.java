@@ -6,6 +6,7 @@
 package fi.dy.potkonen.harjukatu.web.controller;
 
 import fi.dy.potkonen.harjukatu.domain.Harjukatu;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.domain.delegate.HarjukatuDelegate;
@@ -68,7 +69,7 @@ public class HarjukatuController {
         logger.info("addPost("+post+")");
 
         hd.addPost(post);
-        return new Reply(Harjukatu.MESSAGE.OK, "Post With : " + post.getDescription());
+        return new Reply(OK, "Post With : " + post.getDescription());
     }
     
     @PostMapping("/api/upload")
