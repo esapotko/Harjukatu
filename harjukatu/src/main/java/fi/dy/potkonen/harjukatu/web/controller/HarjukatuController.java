@@ -73,14 +73,10 @@ public class HarjukatuController {
     }
     
     @PostMapping("/api/upload")
-    public Reply handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) throws Exception {
+    public Reply handleFileUpload(@RequestParam("file") MultipartFile file) throws Exception {
         logger.info("/upload " + file.getOriginalFilename());
 
-        Reply r = hd.store(file.getOriginalFilename(), file.getBytes());
-        redirectAttributes.addFlashAttribute("message", r.getMessage()+ "!");
-
-        return r;
+        return hd.store(file.getOriginalFilename(), file.getBytes());
     }
    
 }
