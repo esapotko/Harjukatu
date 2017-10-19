@@ -17,10 +17,14 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -66,4 +70,16 @@ public class HarjukatuController {
         hd.addPost(post);
         return new Reply(Harjukatu.MESSAGE.OK, "Post With : " + post.getDescription());
     }
+    
+    @PostMapping("/api/upload")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file,
+            RedirectAttributes redirectAttributes) throws Exception {
+        logger.info("/upload " + file.getOriginalFilename());
+
+        Reply r = hd.store(file.getOriginalFilename(), file.getBytes());
+        redirectAttributes.addFlashAttribute("message", r.getMessage()+ "!");
+
+        return "redirect:/";
+    }
+   
 }

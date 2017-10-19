@@ -40,5 +40,7 @@ public class Reply {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+    public void addMessage(String message) {
+        this.message += message;
+    }
 }

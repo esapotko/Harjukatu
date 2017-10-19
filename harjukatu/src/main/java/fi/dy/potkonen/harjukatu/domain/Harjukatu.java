@@ -11,4 +11,6 @@ package fi.dy.potkonen.harjukatu.domain;
  */
 public interface Harjukatu {
     static enum MESSAGE{OK,ERROR};
+    static int CLAMD = 3310;
+    static int MINUTE = 60000;
 }

@@ -5,6 +5,7 @@
  */
 package fi.dy.potkonen.harjukatu.domain.delegate;
 
+import fi.dy.potkonen.harjukatu.domain.Harjukatu;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.ERROR;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
@@ -73,19 +74,22 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     @Override
     public Reply store(String name, byte[] bytes) throws Exception {
         Reply ry = new Reply(OK,"");  
-        ClamAVClient cl = new ClamAVClient("localhost", 3310, 50000);
+        ClamAVClient cl = new ClamAVClient("localhost", Harjukatu.CLAMD, Harjukatu.MINUTE);
         cl.ping();
         byte[] reply = cl.scan(bytes);
 
         if (!ClamAVClient.isCleanReply(reply)) {
-            String msg = "ClamAV. Something was found";
-            ry = new Reply(ERROR,msg);
+            String msg = "ClamAV. Something was found!";
+            ry.setType(ERROR);
+            ry.addMessage(msg);
             logger.warn(msg);
         } else {
             InputStream in = new ByteArrayInputStream(bytes);
-            File f = new File("/home/esa/Kuvat/"+name);
+            File f = new File("/home/esa/Kuvat/",name);
+            String msg = "File "+f.getAbsolutePath()+" accepted!";
             FileUtils.copyInputStreamToFile(in,f);
-            logger.info("Copy file "+f.getAbsolutePath());
+            ry.addMessage(msg);
+            logger.info(msg);
         }
         return ry;
     }
