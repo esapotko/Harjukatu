@@ -80,7 +80,7 @@ public class HarjukatuController {
         Reply r = hd.store(file.getOriginalFilename(), file.getBytes());
         redirectAttributes.addFlashAttribute("message", r.getMessage()+ "!");
 
-        return "redirect:/";
+        return "index.html";
     }
    
 }
