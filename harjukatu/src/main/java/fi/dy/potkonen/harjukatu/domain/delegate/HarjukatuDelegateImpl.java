@@ -79,14 +79,14 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
         byte[] reply = cl.scan(bytes);
 
         if (!ClamAVClient.isCleanReply(reply)) {
-            String msg = "ClamAV. Something was found!";
+            String msg = "ClamAV found something! REJECT";
             ry.setType(ERROR);
             ry.addMessage(msg);
             logger.warn(msg);
         } else {
             InputStream in = new ByteArrayInputStream(bytes);
             File f = new File("/home/esa/Kuvat/",name);
-            String msg = "File "+f.getAbsolutePath()+" accepted!";
+            String msg = "File "+f.getName()+" accepted!";
             FileUtils.copyInputStreamToFile(in,f);
             ry.addMessage(msg);
             logger.info(msg);
