@@ -87,16 +87,15 @@ HarjukatuApp.controller('HarjukatuCtrl', function($scope, $http) {
             cache: false,
             timeout: 600000,
             success: function (response) {
-                $scope.poststatus = response.data.type;
+                $scope.poststatus = response.type;
+                $scope.message = response.message;
                 console.log('status',$scope.poststatus);
 
                 if($scope.poststatus == "OK") {
-                    $scope.message = response.data.message;
+                    console.log("SUCCESS : ", response);
                 } else {
-                    $scope.message = "Error happened";
                 }
-                console.log("SUCCESS : ", response);
-
+                $("#message").text($scope.message);
             },
             error: function (e) {
                 console.log("ERROR : ", e);

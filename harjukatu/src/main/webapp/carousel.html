@@ -33,10 +33,10 @@
     <form method="POST" enctype="multipart/form-data" ng-submit="addFile()" id="fileUploadForm">
         <table class="table BGC">
             <tr>
-                <td><input type="file" name="file" class="file"/></td>
+                <td><input type="file" name="file" class="file"/>
+                    <div id="message">{{ message }}</div>
+                </td>
                 <td><input type="submit" class="btn btn-primary" value="Upload" />
-                    <div id="messages" ng-show="poststatus == 'OK'">{{ message }}</div>
-                    <div id="errors" ng-show="poststatus != 'OK'" class="help-block">{{ message }}</div>
                 </td>
             </tr>
         </table>

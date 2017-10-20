@@ -9,6 +9,7 @@ import fi.dy.potkonen.harjukatu.domain.Harjukatu;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
+import fi.dy.potkonen.harjukatu.domain.Reply;
 import fi.dy.potkonen.harjukatu.domain.delegate.HarjukatuDelegate;
 import fi.dy.potkonen.harjukatu.jdbc.SpringConfiguration;
 import io.swagger.annotations.Api;
@@ -44,20 +45,17 @@ public class HarjukatuController {
         hd = appContext.getBean(HarjukatuDelegate.class);
     }
     
-    @RequestMapping(value="/api/menu",
-        method={RequestMethod.GET})
+    @RequestMapping(value="/api/menu", method={RequestMethod.GET})
     List<MenuItem> menu() {
         return hd.getTopMenu();
     }
     
-    @RequestMapping(value="/api/posts/{level}",
-        method={RequestMethod.GET})
+    @RequestMapping(value="/api/posts/{level}", method={RequestMethod.GET})
     List<Post> posts(@PathVariable int level) {
         return hd.getPosts(level);
     }
     
-    @RequestMapping(value="/api/posts/{index}/del",
-        method={RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value="/api/posts/{index}/del", method={RequestMethod.POST, RequestMethod.GET})
     List<Post> delPost(@PathVariable int index) {
         logger.info("delPost("+index+")");
 
@@ -73,7 +71,7 @@ public class HarjukatuController {
     }
     
     @PostMapping("/api/upload")
-    public Reply handleFileUpload(@RequestParam("file") MultipartFile file) throws Exception {
+    public Reply fileUpload(@RequestParam("file") MultipartFile file) throws Exception {
         logger.info("/upload " + file.getOriginalFilename());
 
         return hd.store(file.getOriginalFilename(), file.getBytes());

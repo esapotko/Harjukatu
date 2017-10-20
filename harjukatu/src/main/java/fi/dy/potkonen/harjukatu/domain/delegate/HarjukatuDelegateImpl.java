@@ -5,7 +5,6 @@
  */
 package fi.dy.potkonen.harjukatu.domain.delegate;
 
-import fi.dy.potkonen.harjukatu.domain.Harjukatu;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.CLAMD;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.ERROR;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
@@ -13,13 +12,12 @@ import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MINUTE;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
-import fi.dy.potkonen.harjukatu.web.controller.Reply;
+import fi.dy.potkonen.harjukatu.domain.Reply;
 import fi.solita.clamav.ClamAVClient;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
-import org.apache.commons.imaging.Imaging;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +73,7 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
 
     @Override
     public Reply store(String name, byte[] bytes) throws Exception {
-        Reply ry = new Reply(OK,"");  
+        Reply ry = new Reply(OK,"Got store "+name+" request.\n");  
         ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
         cl.ping();
         byte[] reply = cl.scan(bytes);

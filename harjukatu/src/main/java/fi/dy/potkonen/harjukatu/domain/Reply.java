@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.dy.potkonen.harjukatu.web.controller;
+package fi.dy.potkonen.harjukatu.domain;
 
 import fi.dy.potkonen.harjukatu.domain.Harjukatu;
 
@@ -41,6 +41,6 @@ public class Reply {
         this.message = message;
     }
     public void addMessage(String message) {
-        this.message += message;
+        this.message += message + "\n";
     }
 }
