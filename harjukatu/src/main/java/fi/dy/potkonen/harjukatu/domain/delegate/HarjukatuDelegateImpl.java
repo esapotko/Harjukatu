@@ -6,6 +6,7 @@
 package fi.dy.potkonen.harjukatu.domain.delegate;
 
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.CLAMD;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.FILEPATH;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.ERROR;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MINUTE;
@@ -67,8 +68,8 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     @Override
     public List<Post> removePost(int key) {
         getHarjukatuDAO().removePost(key);
-        List<Post> all = getPosts(2);
-        return all;
+
+        return getPosts(2);
     }
 
     @Override
@@ -83,11 +84,11 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
             ry.setType(ERROR);
             ry.addMessage(msg);
             logger.warn(msg);
-        } else {
+        } else { // In memory scan done. Safe enough to save.
             InputStream in = new ByteArrayInputStream(bytes);
-            File f = new File("/home/esa/Kuvat/",name);
-            String msg = "File "+f.getName()+" accepted!";
-            FileUtils.copyInputStreamToFile(in,f);
+            File fl = new File(FILEPATH,name);
+            String msg = "File "+fl.getName()+" accepted!";
+            FileUtils.copyInputStreamToFile(in,fl);
             ry.addMessage(msg);
             logger.info(msg);
         }
