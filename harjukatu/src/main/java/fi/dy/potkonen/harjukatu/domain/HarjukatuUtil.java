@@ -5,19 +5,29 @@
  */
 package fi.dy.potkonen.harjukatu.domain;
 
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.CLAMD;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.FILEPATH;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.ERROR;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MINUTE;
+import fi.solita.clamav.ClamAVClient;
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author esa
  */
 public class HarjukatuUtil {
+    private static Logger logger = LoggerFactory.getLogger("Harjukatu");
 
     public static List<MenuItem> mapMenuItems(ResultSet rs) throws SQLException {
         List<MenuItem> list = new ArrayList<MenuItem>();
@@ -46,10 +56,25 @@ public class HarjukatuUtil {
         }
         return list;
     }
-    public static File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException 
-    {
-        File convFile = new File( multipart.getOriginalFilename());
-        multipart.transferTo(convFile);
-        return convFile;
-    }    
+    public static Reply store(String name, byte[] bytes) throws Exception {
+        Reply ry = new Reply(OK,"Got store "+name+" request.\n");  
+        ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
+        cl.ping();
+        byte[] reply = cl.scan(bytes);
+
+        if (!ClamAVClient.isCleanReply(reply)) {
+            String msg = "ClamAV found something! REJECT";
+            ry.setType(ERROR);
+            ry.addMessage(msg);
+            logger.warn(msg);
+        } else { // In memory scan done. Safe enough to save.
+            InputStream in = new ByteArrayInputStream(bytes);
+            File fl = new File(FILEPATH,name);
+            String msg = "File "+fl.getName()+" accepted!";
+            FileUtils.copyInputStreamToFile(in,fl);
+            ry.addMessage(msg);
+            logger.info(msg);
+        }
+        return ry;
+    }
 }
