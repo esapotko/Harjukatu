@@ -37,9 +37,9 @@ HarjukatuApp.controller('HarjukatuCtrl', function($scope, $http) {
         console.log('get posts error',data)
     });
     /*
-     * Content
+     * Content, need a littebit nginx configuration and metada to be implemented
      */
-    $scope.myInterval = 3000;
+    $scope.slideInterval = 3000;
     $scope.slides = [
         {
           image: 'http://lorempixel.com/400/200/'
@@ -73,7 +73,7 @@ HarjukatuApp.controller('HarjukatuCtrl', function($scope, $http) {
         var form = $('#fileUploadForm')[0];
         var data = new FormData(form);
 
-        data.append("CustomField", "This is some extra data, testing");
+        data.append("description", "Input field, which should be seen somehow in tivoli");
 
         $.ajax({
             type: "POST",

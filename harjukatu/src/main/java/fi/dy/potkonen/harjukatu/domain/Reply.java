@@ -14,6 +14,7 @@ import fi.dy.potkonen.harjukatu.domain.Harjukatu;
 public class Reply {
     Harjukatu.MESSAGE type = Harjukatu.MESSAGE.OK;
     String message = "";
+    UploadItem item;
     
     public Reply(Harjukatu.MESSAGE msg, String message) {
         type = msg;
@@ -40,7 +41,16 @@ public class Reply {
     public void setMessage(String message) {
         this.message = message;
     }
+    
     public void addMessage(String message) {
         this.message += message + "\n";
+    }
+
+    public UploadItem getItem() {
+        return item;
+    }
+
+    public void setItem(UploadItem item) {
+        this.item = item;
     }
 }

@@ -4,11 +4,11 @@
 - NetBeans
 - WorkBench
 ## Manageable server
-- MySQL
-- CI tools. Git, Maven, Java
+- MySQL. WorkBench as UI
+- CI tools. Git, Maven, Java. Full integration through Netbeans.
 - Loadbalancing. NGinx
 - Consolidated logging through syslog. Graylog, Elasticsearch, Mongo
-- Services managed by sysctl.
+- Services managed by systemctl.
 ## Location
 ![Harjukatu](harjukatu/src/main/webapp/img/hk-map.png?raw=true)
 
