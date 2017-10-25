@@ -5,7 +5,6 @@
  */
 package fi.dy.potkonen.harjukatu.web.controller;
 
-import fi.dy.potkonen.harjukatu.domain.Harjukatu;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *

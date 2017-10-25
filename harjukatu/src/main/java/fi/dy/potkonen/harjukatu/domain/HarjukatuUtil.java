@@ -56,6 +56,10 @@ public class HarjukatuUtil {
         }
         return list;
     }
+    
+    void addGPSData(File file) {
+    }
+    
     public static Reply store(String name, byte[] bytes) throws Exception {
         Reply ry = new Reply(OK,"Got store "+name+" request.\n");  
         ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
