@@ -6,6 +6,7 @@
 package fi.dy.potkonen.harjukatu.web.controller;
 
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
+import fi.dy.potkonen.harjukatu.domain.HarjukatuUtil;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.domain.Reply;
@@ -13,6 +14,7 @@ import fi.dy.potkonen.harjukatu.domain.delegate.HarjukatuDelegate;
 import fi.dy.potkonen.harjukatu.jdbc.SpringConfiguration;
 import io.swagger.annotations.Api;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,10 +71,11 @@ public class HarjukatuController {
     }
     
     @PostMapping("/api/upload")
-    public Reply fileUpload(@RequestParam("file") MultipartFile file) throws Exception {
+    public Reply fileUpload(HttpServletRequest request, 
+            @RequestParam("file") MultipartFile file) throws Exception {
         logger.info("/upload " + file.getOriginalFilename());
-
-        return hd.store(file.getOriginalFilename(), file.getBytes());
+        String ip = HarjukatuUtil.getClientIp(request);
+        return hd.store(file.getOriginalFilename(), file.getBytes(), ip);
     }
    
 }

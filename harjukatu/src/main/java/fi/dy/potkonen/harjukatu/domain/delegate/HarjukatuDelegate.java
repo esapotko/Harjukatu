@@ -30,6 +30,6 @@ public interface HarjukatuDelegate {
 
     void setHarjukatuDAO(HarjukatuDAO harjukatuDAO);
     
-    Reply store(String name, byte[] bytes) throws Exception;
+    Reply store(String name, byte[] bytes, String ip) throws Exception;
     
 }

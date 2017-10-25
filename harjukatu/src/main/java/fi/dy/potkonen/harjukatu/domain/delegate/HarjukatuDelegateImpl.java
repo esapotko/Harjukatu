@@ -64,7 +64,7 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     }
 
     @Override
-    public Reply store(String name, byte[] bytes) throws Exception {
-        return HarjukatuUtil.store(name, bytes);
+    public Reply store(String name, byte[] bytes, String ip) throws Exception {
+        return HarjukatuUtil.store(name, bytes, ip);
     }
 }

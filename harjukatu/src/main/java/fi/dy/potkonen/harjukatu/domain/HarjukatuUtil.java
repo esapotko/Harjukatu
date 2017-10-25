@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,17 +58,36 @@ public class HarjukatuUtil {
         return list;
     }
     
-    void addGPSData(File file) {
+    public static String getClientIp(HttpServletRequest request) {
+
+        String remoteAddr = "";
+
+        if (request != null) {
+            remoteAddr = request.getHeader("X-FORWARDED-FOR");
+            if (remoteAddr == null || "".equals(remoteAddr)) {
+                remoteAddr = request.getRemoteAddr();
+            }
+        }
+
+        return remoteAddr;
     }
     
-    public static Reply store(String name, byte[] bytes) throws Exception {
-        Reply ry = new Reply(OK,"Got store "+name+" request.\n");  
+    static void addGPSData(File file) {
+    }
+    
+    public static Reply store(String name, byte[] bytes, String ip) throws Exception {
+        Reply ry = new Reply(OK,"Got store "+name+" request.\n");
+        // Virus check
         ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
         cl.ping();
         byte[] reply = cl.scan(bytes);
+        // Inform sender
+        UploadItem item = new UploadItem();
+        item.setIp(ip);
+        ry.setItem(item);
 
         if (!ClamAVClient.isCleanReply(reply)) {
-            String msg = "ClamAV found something! REJECT";
+            String msg = "ClamAV found something! REJECT from client["+ip+"]";
             ry.setType(ERROR);
             ry.addMessage(msg);
             logger.warn(msg);
@@ -76,6 +96,8 @@ public class HarjukatuUtil {
             File fl = new File(FILEPATH,name);
             String msg = "File "+fl.getName()+" accepted!";
             FileUtils.copyInputStreamToFile(in,fl);
+            // Fillup GPS
+            addGPSData(fl);
             ry.addMessage(msg);
             logger.info(msg);
         }
