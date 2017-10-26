@@ -75,15 +75,19 @@ public class HarjukatuUtil {
     static void addGPSData(byte[] bytes) {
     }
     
+    static void fillTime(Reply reply) {
+    }
+    
     public static Reply store(String name, byte[] bytes, String ip) throws Exception {
-        Reply ry = new Reply(OK,"Got store "+name+" request.\n");
-        // Virus check
-        ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
-        byte[] reply = cl.scan(bytes);
         // Inform sender
         UploadItem item = new UploadItem();
         item.setIp(ip);
+        Reply ry = new Reply(OK,"Got store "+name+" request.\n");
         ry.setItem(item);
+        fillTime(ry);
+        // Virus check
+        ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
+        byte[] reply = cl.scan(bytes);
 
         if (!ClamAVClient.isCleanReply(reply)) {
             String msg = "ClamAV found something! REJECT from client["+ip+"]";
@@ -95,7 +99,7 @@ public class HarjukatuUtil {
             File fl = new File(FILEPATH,name);
             String msg = "File "+fl.getName()+" accepted!";
             FileUtils.copyInputStreamToFile(in,fl);
-            // Fillup GPS
+            // Fill GPS
             addGPSData(bytes);
             ry.addMessage(msg);
             logger.info(msg);

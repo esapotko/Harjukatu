@@ -90,11 +90,6 @@ HarjukatuApp.controller('HarjukatuCtrl', function($scope, $http) {
                 $scope.poststatus = response.type;
                 $scope.message = response.message;
                 console.log('status',$scope.poststatus);
-
-                if($scope.poststatus == "OK") {
-                    console.log("SUCCESS : ", response);
-                } else {
-                }
                 $("#message").text($scope.message);
             },
             error: function (e) {
