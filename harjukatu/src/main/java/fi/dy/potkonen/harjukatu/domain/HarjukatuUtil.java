@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.thymeleaf.util.StringUtils;
 
 /**
  *
@@ -59,12 +60,11 @@ public class HarjukatuUtil {
     }
     
     public static String getClientIp(HttpServletRequest request) {
-
         String remoteAddr = "";
 
         if (request != null) {
             remoteAddr = request.getHeader("X-FORWARDED-FOR");
-            if (remoteAddr == null || "".equals(remoteAddr)) {
+            if (StringUtils.isEmpty(remoteAddr)) {
                 remoteAddr = request.getRemoteAddr();
             }
         }
@@ -72,14 +72,13 @@ public class HarjukatuUtil {
         return remoteAddr;
     }
     
-    static void addGPSData(File file) {
+    static void addGPSData(byte[] bytes) {
     }
     
     public static Reply store(String name, byte[] bytes, String ip) throws Exception {
         Reply ry = new Reply(OK,"Got store "+name+" request.\n");
         // Virus check
         ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
-        cl.ping();
         byte[] reply = cl.scan(bytes);
         // Inform sender
         UploadItem item = new UploadItem();
@@ -97,7 +96,7 @@ public class HarjukatuUtil {
             String msg = "File "+fl.getName()+" accepted!";
             FileUtils.copyInputStreamToFile(in,fl);
             // Fillup GPS
-            addGPSData(fl);
+            addGPSData(bytes);
             ry.addMessage(msg);
             logger.info(msg);
         }

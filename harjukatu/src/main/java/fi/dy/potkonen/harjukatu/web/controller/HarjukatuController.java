@@ -57,15 +57,11 @@ public class HarjukatuController {
     
     @RequestMapping(value="/api/posts/{index}/del", method={RequestMethod.POST, RequestMethod.GET})
     List<Post> delPost(@PathVariable int index) {
-        logger.info("delPost("+index+")");
-
         return hd.removePost(index);
     }
     
     @RequestMapping(value = "/api/add", method = RequestMethod.POST)	
     public Reply newPost( @RequestBody Post post )   {		
-        logger.info("addPost("+post+")");
-
         hd.addPost(post);
         return new Reply(OK, "Post With : " + post.getDescription());
     }
@@ -73,7 +69,6 @@ public class HarjukatuController {
     @PostMapping("/api/upload")
     public Reply fileUpload(HttpServletRequest request, 
             @RequestParam("file") MultipartFile file) throws Exception {
-        logger.info("/upload " + file.getOriginalFilename());
         String ip = HarjukatuUtil.getClientIp(request);
         return hd.store(file.getOriginalFilename(), file.getBytes(), ip);
     }
