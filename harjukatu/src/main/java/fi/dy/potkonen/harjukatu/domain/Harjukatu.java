@@ -13,5 +13,5 @@ public interface Harjukatu {
     static enum MESSAGE{OK,ERROR};
     static int CLAMD = 3310;
     static int MINUTE = 60000;
-    static String FILEPATH = "/home/esa/Kuvat/";
+    static String FILEPATH = "/var/www/html/static/";
 }
