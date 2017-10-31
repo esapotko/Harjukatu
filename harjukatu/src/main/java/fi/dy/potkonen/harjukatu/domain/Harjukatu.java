@@ -14,4 +14,6 @@ public interface Harjukatu {
     static int CLAMD = 3310;
     static int MINUTE = 60000;
     static String FILEPATH = "/var/www/html/static/";
+    static String IMAGEPATTERN = "(.*/)*.+\\.(png|jpg|gif|bmp|jpeg|PNG|JPG|GIF|BMP)$";
+    static String SLIDEURL = "http://potkonen.dy.fi/static/";
 }

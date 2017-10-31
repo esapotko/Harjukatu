@@ -10,6 +10,7 @@ import fi.dy.potkonen.harjukatu.domain.HarjukatuUtil;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.domain.Reply;
+import fi.dy.potkonen.harjukatu.domain.Slide;
 import fi.dy.potkonen.harjukatu.domain.delegate.HarjukatuDelegate;
 import fi.dy.potkonen.harjukatu.jdbc.SpringConfiguration;
 import io.swagger.annotations.Api;
@@ -50,6 +51,11 @@ public class HarjukatuController {
         return hd.getTopMenu();
     }
     
+    @RequestMapping(value="/api/slides", method={RequestMethod.GET})
+    List<Slide> slides() {
+        return hd.listSlides();
+    }
+
     @RequestMapping(value="/api/posts/{level}", method={RequestMethod.GET})
     List<Post> posts(@PathVariable int level) {
         return hd.getPosts(level);

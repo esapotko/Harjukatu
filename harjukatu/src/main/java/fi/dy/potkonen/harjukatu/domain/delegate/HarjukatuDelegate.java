@@ -9,6 +9,7 @@ import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
 import fi.dy.potkonen.harjukatu.domain.Reply;
+import fi.dy.potkonen.harjukatu.domain.Slide;
 import java.util.List;
 
 /**
@@ -32,4 +33,5 @@ public interface HarjukatuDelegate {
     
     Reply store(String name, byte[] bytes, String ip) throws Exception;
     
+    List<Slide> listSlides();
 }

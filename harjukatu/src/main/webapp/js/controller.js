@@ -40,20 +40,13 @@ HarjukatuApp.controller('HarjukatuCtrl', function($scope, $http) {
      * Content, need a littebit nginx configuration and metada to be implemented
      */
     $scope.slideInterval = 3000;
-    $scope.slides = [
-        {
-          image: 'http://lorempixel.com/400/200/'
-        },
-        {
-          image: 'http://lorempixel.com/400/200/food'
-        },
-        {
-          image: 'http://lorempixel.com/400/200/sports'
-        },
-        {
-          image: 'http://lorempixel.com/400/200/people'
-        }
-    ];    
+    $http.get("/api/slides")
+    .then(function(response) {
+        $scope.slides = response.data; 
+    })
+    .catch(function (data) {
+        console.log('get slides error',data)
+    });
     /*
      * Functionality
      */

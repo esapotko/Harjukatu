@@ -10,6 +10,7 @@ import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
 import fi.dy.potkonen.harjukatu.domain.Reply;
+import fi.dy.potkonen.harjukatu.domain.Slide;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,5 +67,10 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     @Override
     public Reply store(String name, byte[] bytes, String ip) throws Exception {
         return HarjukatuUtil.store(name, bytes, ip);
+    }
+
+    @Override
+    public List<Slide> listSlides() {
+        return HarjukatuUtil.listSlides();
     }
 }

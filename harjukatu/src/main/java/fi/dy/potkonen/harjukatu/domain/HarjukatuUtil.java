@@ -7,13 +7,15 @@ package fi.dy.potkonen.harjukatu.domain;
 
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.CLAMD;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.FILEPATH;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.IMAGEPATTERN;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.ERROR;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MINUTE;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.SLIDEURL;
 import fi.solita.clamav.ClamAVClient;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileFilter;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,9 +33,9 @@ import org.thymeleaf.util.StringUtils;
  * @author esa
  */
 public class HarjukatuUtil {
-
+    
     private static Logger logger = LoggerFactory.getLogger("Harjukatu");
-
+    
     public static List<MenuItem> mapMenuItems(ResultSet rs) throws SQLException {
         List<MenuItem> list = new ArrayList<MenuItem>();
         while (rs.next()) {
@@ -47,7 +49,7 @@ public class HarjukatuUtil {
         }
         return list;
     }
-
+    
     public static List<Post> mapPostItems(ResultSet rs) throws SQLException {
         List<Post> list = new ArrayList<Post>();
         while (rs.next()) {
@@ -61,20 +63,20 @@ public class HarjukatuUtil {
         }
         return list;
     }
-
+    
     public static String getClientIp(HttpServletRequest request) {
         String remoteAddr = "";
-
+        
         if (request != null) {
             remoteAddr = request.getHeader("X-FORWARDED-FOR");
             if (StringUtils.isEmpty(remoteAddr)) {
                 remoteAddr = request.getRemoteAddr();
             }
         }
-
+        
         return remoteAddr;
     }
-
+    
     static Reply fillInfo(byte[] bytes, String name, String ip) {
         // Inform sender
         UploadItem item = new UploadItem();
@@ -84,7 +86,7 @@ public class HarjukatuUtil {
         reply.setItem(item);
         try {
             // Enable virus check test
-            if(!"EICAR".equals(name)) {
+            if (!"EICAR".equals(name)) {
                 ImageIO.read(new ByteArrayInputStream(bytes)).toString();
             }
             // It's an image (only BMP, GIF, JPG and PNG are recognized).
@@ -95,17 +97,17 @@ public class HarjukatuUtil {
         // Todo Check distance from harjukatu. 0.5 km range Max
         return reply;
     }
-
+    
     public static Reply store(String name, byte[] bytes, String ip) throws Exception {
         // Basic check. Type, location
         Reply ry = fillInfo(bytes, name, ip);
-        if(ry.getType() != OK) {
+        if (ry.getType() != OK) {
             return ry;
         }
         // Virus check
         ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
         byte[] reply = cl.scan(bytes);
-
+        
         if (!ClamAVClient.isCleanReply(reply)) {
             String msg = "ClamAV found something! REJECT from client[" + ip + "]";
             ry.setType(ERROR);
@@ -120,5 +122,23 @@ public class HarjukatuUtil {
             logger.info(msg);
         }
         return ry;
+    }
+    
+    public static List<Slide> listSlides() {
+        List<Slide> slides = new ArrayList<Slide>(); 
+        FileFilter filter = new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.getAbsolutePath().matches(IMAGEPATTERN);
+            }
+        };
+        File in = new File(FILEPATH);
+        File[] paths = in.listFiles(filter);
+        
+        for(File path:paths) {
+            slides.add(new Slide(SLIDEURL+path.getName()));
+        }
+        
+        return slides;
     }
 }
