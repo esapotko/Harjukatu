@@ -6,6 +6,7 @@
 package fi.dy.potkonen.harjukatu.domain;
 
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.CLAMD;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.CLAMHOST;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.FILEPATH;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.IMAGEPATTERN;
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.ERROR;
@@ -85,7 +86,7 @@ public class HarjukatuUtil {
         Reply reply = new Reply(OK, "Got store " + name + " request.\n");
         reply.setItem(item);
         try {
-            // Enable virus check test
+            // Enable virus check testfile (not a image)
             if (!"EICAR".equals(name)) {
                 ImageIO.read(new ByteArrayInputStream(bytes)).toString();
             }
@@ -105,7 +106,7 @@ public class HarjukatuUtil {
             return ry;
         }
         // Virus check
-        ClamAVClient cl = new ClamAVClient("localhost", CLAMD, MINUTE);
+        ClamAVClient cl = new ClamAVClient(CLAMHOST, CLAMD, MINUTE);
         byte[] reply = cl.scan(bytes);
         
         if (!ClamAVClient.isCleanReply(reply)) {
