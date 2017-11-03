@@ -21,7 +21,22 @@ VALUES
 'index.html',
 '');
 
-SELECT * FROM potkonen.MenuItem where Position = 'Top';
+INSERT INTO `potkonen`.`MenuItem`
+(`Title`,
+`Position`,
+`Description`,
+`Action`,
+`Image`)
+VALUES
+('TODO',
+'Top',
+'Todo page',
+'todo.html',
+'');
+
+SELECT * FROM MenuItem LIMIT 100;
+SELECT * FROM MenuItem LIMIT 100;
+
 DELETE FROM `potkonen`.`MenuItem`;
 SET SQL_SAFE_UPDATES = 0;
 
