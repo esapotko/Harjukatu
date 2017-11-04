@@ -5,7 +5,7 @@
 - WorkBench
 ## Manageable server
 - MySQL. WorkBench as UI
-- CI tools. Git, Maven, Java. Full integration through Netbeans.
+- CI tools. Git, Maven, Java. Full integration through Netbeans (Allmost anything, Workbench needed rarely).
 - Loadbalancing. NGinx
 - Consolidated logging through syslog. Graylog, Elasticsearch, Mongo
 - Services managed by systemctl.

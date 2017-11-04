@@ -110,7 +110,7 @@ public class HarjukatuUtil {
         byte[] reply = cl.scan(bytes);
         
         if (!ClamAVClient.isCleanReply(reply)) {
-            String msg = "ClamAV found something! REJECT from client[" + ip + "]";
+            String msg = "ClamAV found something! REJECT to client[" + ip + "]";
             ry.setType(ERROR);
             ry.addMessage(msg);
             logger.warn(msg);
