@@ -2,7 +2,7 @@
 # Web application and Linux server (Ubuntu) playground project at my home PC
 ## Dynamic web application. Just HTML/CSS/REST/SQL
 - NetBeans
-![Demo](harjukatu/harjukatu.png?raw=true)
+![Demo](harjukatu.png?raw=true)
 - WorkBench
 ## Manageable server
 - MySQL. WorkBench as UI
