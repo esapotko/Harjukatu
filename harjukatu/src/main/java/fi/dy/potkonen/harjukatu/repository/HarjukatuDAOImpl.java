@@ -9,10 +9,13 @@ package fi.dy.potkonen.harjukatu.repository;
 import fi.dy.potkonen.harjukatu.domain.HarjukatuUtil;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
+import fi.dy.potkonen.harjukatu.domain.Slide;
+import fi.dy.potkonen.harjukatu.domain.UploadItem;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -100,5 +103,20 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
             logger.error("Failed sql["+sql+"]", ex);
         }
         return list;
+    }
+
+    @Override
+    public void addUploadItem(UploadItem item) {
+        String sql = "{call newFile(?,?,?)}";
+        try {
+            Connection connection = jdbcTemplate.getDataSource().getConnection();
+            CallableStatement cs = connection.prepareCall(sql);
+            cs.setString(1, item.getPath());
+            cs.setString(2, item.getDescription());
+            cs.setTimestamp(3, new Timestamp(item.getCreated().getTimeInMillis()));
+            cs.execute();
+        } catch (SQLException ex) {
+            logger.error("Failed sql["+sql+"]", ex);
+        }
     }
 }

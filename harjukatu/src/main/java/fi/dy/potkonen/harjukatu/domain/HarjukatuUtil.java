@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -82,6 +83,8 @@ public class HarjukatuUtil {
         // Inform sender
         UploadItem item = new UploadItem();
         item.setIp(ip);
+        item.setPath(FILEPATH + name);
+        item.setCreated(Calendar.getInstance());
         
         Reply reply = new Reply(OK, "Got store " + name + " request.\n");
         reply.setItem(item);
@@ -137,7 +140,7 @@ public class HarjukatuUtil {
         File[] paths = in.listFiles(filter);
         
         for(File path:paths) {
-            slides.add(new Slide(SLIDEURL+path.getName()));
+            slides.add(new Slide(SLIDEURL+path.getName(),""));
         }
         
         return slides;

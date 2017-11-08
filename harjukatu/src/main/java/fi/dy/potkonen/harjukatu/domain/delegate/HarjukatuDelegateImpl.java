@@ -5,12 +5,14 @@
  */
 package fi.dy.potkonen.harjukatu.domain.delegate;
 
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
 import fi.dy.potkonen.harjukatu.domain.HarjukatuUtil;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
 import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
 import fi.dy.potkonen.harjukatu.domain.Reply;
 import fi.dy.potkonen.harjukatu.domain.Slide;
+import fi.dy.potkonen.harjukatu.domain.UploadItem;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,8 +67,14 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     }
 
     @Override
-    public Reply store(String name, byte[] bytes, String ip) throws Exception {
-        return HarjukatuUtil.store(name, bytes, ip);
+    public Reply store(String name, String description, byte[] bytes, String ip) throws Exception {
+        Reply ry = HarjukatuUtil.store(name, bytes, ip);
+        if (ry.getType() == OK) {
+            UploadItem it = ry.getItem();
+            it.setDescription(description);
+            getHarjukatuDAO().addUploadItem(it);
+        }
+        return ry;
     }
 
     @Override

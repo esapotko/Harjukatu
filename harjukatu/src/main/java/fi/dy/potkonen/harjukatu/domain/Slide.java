@@ -11,8 +11,13 @@ package fi.dy.potkonen.harjukatu.domain;
  */
 public class Slide {
     private String image;
-    public Slide(String name) {
+    private String description;
+    public Slide(String name,String description) {
         setImage(name);
+        setDescription(description);
+    }
+
+    public Slide() {
     }
 
     public String getImage() {
@@ -22,5 +27,13 @@ public class Slide {
     public void setImage(String image) {
         this.image = image;
     }
-    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }

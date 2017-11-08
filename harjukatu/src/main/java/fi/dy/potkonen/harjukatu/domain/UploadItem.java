@@ -5,6 +5,8 @@
  */
 package fi.dy.potkonen.harjukatu.domain;
 
+import java.util.Calendar;
+
 /**
  *
  * @author esa
@@ -13,12 +15,25 @@ public class UploadItem {
     String ip;
     double lon;
     double lat;
-    String description;
-    int year;
-    int month;
-    int day;
-    int hour;
-    int minute;
+    private String path;
+    private String description;
+    private Calendar created;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Calendar getCreated() {
+        return created;
+    }
+
+    public void setCreated(Calendar created) {
+        this.created = created;
+    }
 
     public String getIp() {
         return ip;
@@ -52,48 +67,8 @@ public class UploadItem {
         this.description = description;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getHour() {
-        return hour;
-    }
-
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
-
     @Override
     public String toString() {
-        return "UploadItem{" + "ip=" + ip + ", lon=" + lon + ", lat=" + lat + ", description=" + description + ", year=" + year + ", month=" + month + ", day=" + day + ", hour=" + hour + ", minute=" + minute + '}';
+        return "UploadItem{" + "ip=" + ip + ", description=" + description + '}';
     }
 }

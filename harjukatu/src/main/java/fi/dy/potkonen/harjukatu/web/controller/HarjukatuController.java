@@ -77,8 +77,8 @@ public class HarjukatuController {
             @RequestParam("description") String description,
             @RequestParam("file") MultipartFile file) throws Exception {
         String ip = HarjukatuUtil.getClientIp(request);
-        Reply ry = hd.store(file.getOriginalFilename(), file.getBytes(), ip);
-        ry.addMessage(description);
+        Reply ry = hd.store(file.getOriginalFilename(), description, file.getBytes(), ip);
+        
         return ry;
     }
    

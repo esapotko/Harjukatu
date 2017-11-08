@@ -31,7 +31,7 @@ public interface HarjukatuDelegate {
 
     void setHarjukatuDAO(HarjukatuDAO harjukatuDAO);
     
-    Reply store(String name, byte[] bytes, String ip) throws Exception;
+    Reply store(String name, String description, byte[] bytes, String ip) throws Exception;
     
     List<Slide> listSlides();
 }

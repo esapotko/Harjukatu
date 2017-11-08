@@ -7,6 +7,8 @@ package fi.dy.potkonen.harjukatu.repository;
 
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
+import fi.dy.potkonen.harjukatu.domain.Slide;
+import fi.dy.potkonen.harjukatu.domain.UploadItem;
 import java.util.List;
 
 /**
@@ -24,4 +26,6 @@ public interface HarjukatuDAO {
     void addPost( Post post );
     
     void removePost(long key);
+    
+    void addUploadItem( UploadItem item );
 }
