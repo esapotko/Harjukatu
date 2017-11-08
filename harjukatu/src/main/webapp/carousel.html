@@ -5,8 +5,8 @@
 </table>
 <div id="tivoli" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
-    <ol class="carousel-indicators" ng-repeat="slide in slides">
-        <li data-target="#tivoli" data-slide-to="{{$index}}"></li>
+    <ol class="carousel-indicators">
+        <li ng-repeat="slide in slides track by $index" data-target="#tivoli" data-slide-to="{{$index}}"></li>
     </ol>
 
     <!-- Wrapper for slides -->
@@ -32,6 +32,9 @@
 <div class="tab-content">
     <form method="POST" enctype="multipart/form-data" ng-submit="addFile()" id="fileUploadForm">
         <table class="table BGC">
+            <tr>
+                <textarea class="form-control" rows="5" name="description" id="comment"></textarea>
+            </tr>
             <tr>
                 <td><input type="file" name="file" class="file"/>
                     <div id="message">{{ message }}</div>

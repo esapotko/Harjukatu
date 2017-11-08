@@ -73,10 +73,13 @@ public class HarjukatuController {
     }
     
     @PostMapping("/api/upload")
-    public Reply fileUpload(HttpServletRequest request, 
+    public Reply fileUpload(HttpServletRequest request,
+            @RequestParam("description") String description,
             @RequestParam("file") MultipartFile file) throws Exception {
         String ip = HarjukatuUtil.getClientIp(request);
-        return hd.store(file.getOriginalFilename(), file.getBytes(), ip);
+        Reply ry = hd.store(file.getOriginalFilename(), file.getBytes(), ip);
+        ry.addMessage(description);
+        return ry;
     }
    
 }
