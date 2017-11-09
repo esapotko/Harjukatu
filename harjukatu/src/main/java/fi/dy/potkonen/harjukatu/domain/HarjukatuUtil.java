@@ -79,10 +79,9 @@ public class HarjukatuUtil {
         return remoteAddr;
     }
     
-    static Reply fillInfo(byte[] bytes, String name, String ip) {
+    static Reply fillInfo(byte[] bytes, String name) {
         // Inform sender
         UploadItem item = new UploadItem();
-        item.setIp(ip);
         item.setPath(FILEPATH + name);
         item.setCreated(Calendar.getInstance());
         
@@ -102,18 +101,15 @@ public class HarjukatuUtil {
         return reply;
     }
     
-    public static Reply store(String name, byte[] bytes, String ip) throws Exception {
+    public static Reply store(String name, byte[] bytes) throws Exception {
         // Basic check. Type, location
-        Reply ry = fillInfo(bytes, name, ip);
-        if (ry.getType() != OK) {
-            return ry;
-        }
+        Reply ry = fillInfo(bytes, name);
         // Virus check
         ClamAVClient cl = new ClamAVClient(CLAMHOST, CLAMD, MINUTE);
         byte[] reply = cl.scan(bytes);
         
         if (!ClamAVClient.isCleanReply(reply)) {
-            String msg = "ClamAV found something! REJECT to client[" + ip + "]";
+            String msg = "ClamAV found something! REJECT";
             ry.setType(ERROR);
             ry.addMessage(msg);
             logger.warn(msg);

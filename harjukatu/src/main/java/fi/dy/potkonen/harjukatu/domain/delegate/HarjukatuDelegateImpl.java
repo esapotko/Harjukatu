@@ -68,9 +68,11 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
 
     @Override
     public Reply store(String name, String description, byte[] bytes, String ip) throws Exception {
-        Reply ry = HarjukatuUtil.store(name, bytes, ip);
+        Reply ry = HarjukatuUtil.store(name, bytes);
+        UploadItem it = ry.getItem();
+        // Double transaction. File stays if DB fails. Handled manually
         if (ry.getType() == OK) {
-            UploadItem it = ry.getItem();
+            it.setIp(ip);
             it.setDescription(description);
             getHarjukatuDAO().addUploadItem(it);
         }

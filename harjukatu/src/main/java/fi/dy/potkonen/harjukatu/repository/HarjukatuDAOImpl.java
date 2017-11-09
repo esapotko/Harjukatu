@@ -49,7 +49,8 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
             logger.error("Failed sql["+sql+"]", ex);
         }
         return list;
-    }    
+    }
+    
     public List<Post> getPosts(int level){
         return getPostsByPriority(level);
     }    
@@ -57,7 +58,7 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
     @Override
     public List<MenuItem> getLeftMenu() {
         return null;
-   }
+    }
 
     @Override
     public void addPost(Post post) {
