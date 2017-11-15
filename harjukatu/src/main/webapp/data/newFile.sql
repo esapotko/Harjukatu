@@ -1,0 +1,12 @@
+DELIMITER @@
+DROP PROCEDURE newFile @@
+CREATE PROCEDURE potkonen.newFile
+(
+IN iPATH VARCHAR(256),
+IN iDESCRIPTION VARCHAR(256),
+IN iCreated TIMESTAMP)
+BEGIN
+	INSERT INTO FileItem (Path, Created, Description)
+	VALUES (iPATH, iCreated, iDESCRIPTION);
+END @@ 
+DELIMITER ; 
