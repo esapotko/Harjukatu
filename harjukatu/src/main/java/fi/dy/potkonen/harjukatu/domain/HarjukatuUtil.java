@@ -20,6 +20,7 @@ import java.io.FileFilter;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -66,6 +67,25 @@ public class HarjukatuUtil {
         return list;
     }
     
+    public static List<UploadItem> mapUploadItems(ResultSet rs) throws SQLException {
+        List<UploadItem> list = new ArrayList<UploadItem>();
+        while (rs.next()) {
+            UploadItem pt = new UploadItem();
+            pt.setPath(rs.getString("PATH"));
+            pt.setCreated(toCalendar(rs.getTimestamp("CREATED")));
+            pt.setDescription(rs.getString("DESCRIPTION"));
+            list.add(pt);
+        }
+        return list;
+    }
+    
+    public static Calendar toCalendar(Timestamp ts) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(ts.getTime());
+        return cal;
+    }
+            
+            
     public static String getClientIp(HttpServletRequest request) {
         String remoteAddr = "";
         

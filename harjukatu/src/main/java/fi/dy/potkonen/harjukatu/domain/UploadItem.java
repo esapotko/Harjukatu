@@ -23,6 +23,11 @@ public class UploadItem {
         return path;
     }
 
+    public String getName() {
+        String folders[] = path.split("/");
+        return folders[folders.length - 1];
+    }
+
     public void setPath(String path) {
         this.path = path;
     }

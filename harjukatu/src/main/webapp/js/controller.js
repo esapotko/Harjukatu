@@ -66,7 +66,7 @@ HarjukatuApp.controller('HarjukatuCtrl', function($scope, $http) {
         var form = $('#fileUploadForm')[0];
         var data = new FormData(form);
 
-        data.append("description", "Input field, which should be seen somehow in tivoli");
+        //data.append("description", "Input field, which should be seen somehow in tivoli");
 
         $.ajax({
             type: "POST",

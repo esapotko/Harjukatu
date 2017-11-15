@@ -6,6 +6,7 @@
 package fi.dy.potkonen.harjukatu.domain.delegate;
 
 import static fi.dy.potkonen.harjukatu.domain.Harjukatu.MESSAGE.OK;
+import static fi.dy.potkonen.harjukatu.domain.Harjukatu.SLIDEURL;
 import fi.dy.potkonen.harjukatu.domain.HarjukatuUtil;
 import fi.dy.potkonen.harjukatu.domain.MenuItem;
 import fi.dy.potkonen.harjukatu.domain.Post;
@@ -13,6 +14,7 @@ import fi.dy.potkonen.harjukatu.repository.HarjukatuDAO;
 import fi.dy.potkonen.harjukatu.domain.Reply;
 import fi.dy.potkonen.harjukatu.domain.Slide;
 import fi.dy.potkonen.harjukatu.domain.UploadItem;
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,8 +81,18 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
         return ry;
     }
 
+    private Slide toSlide(UploadItem ui) {
+        Slide sl = new Slide(SLIDEURL+ui.getName(), ui.getDescription()));
+        return sl;
+    }
+    
     @Override
     public List<Slide> listSlides() {
-        return HarjukatuUtil.listSlides();
+        List<UploadItem> items = getHarjukatuDAO().listUploads();
+        List<Slide> slides = new ArrayList<Slide>();
+        for(UploadItem ui : items) {
+            slides.add(toSlide(ui));
+        }
+        return slides;
     }
 }

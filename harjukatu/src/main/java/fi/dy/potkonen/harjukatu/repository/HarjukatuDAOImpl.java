@@ -120,4 +120,19 @@ public class HarjukatuDAOImpl implements HarjukatuDAO {
             logger.error("Failed sql["+sql+"]", ex);
         }
     }
+
+    @Override
+    public List<UploadItem> listUploads() {
+        List<UploadItem> list = new ArrayList<UploadItem>();
+        String sql = "{call getUploads()}";
+        try {
+            Connection connection = jdbcTemplate.getDataSource().getConnection();
+            CallableStatement cs = connection.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            list = HarjukatuUtil.mapUploadItems(rs);
+        } catch (SQLException ex) {
+            logger.error("Failed sql["+sql+"]", ex);
+        }
+        return list;
+    }
 }

@@ -22,9 +22,9 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 @Configuration
 public class SpringConfiguration {
-    @Value("#{environment['DBUSER']}")
+    @Value("${mysql.user:esa}")
     private String user;    
-    @Value("#{environment['DBPASS']}")
+    @Value("${mysql.pasw:default}")
     private String password;    
     
     @Bean

@@ -28,4 +28,6 @@ public interface HarjukatuDAO {
     void removePost(long key);
     
     void addUploadItem( UploadItem item );
+    
+    List<UploadItem> listUploads();
 }
