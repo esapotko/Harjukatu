@@ -24,7 +24,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 public class SpringConfiguration {
     @Value("${mysql.user:esa}")
     private String user;    
-    @Value("${mysql.pasw:default}")
+    @Value("${mysql.pasw:#B33F33&987654?}")
     private String password;    
     
     @Bean

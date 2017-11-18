@@ -82,7 +82,7 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
     }
 
     private Slide toSlide(UploadItem ui) {
-        Slide sl = new Slide(SLIDEURL+ui.getName(), ui.getDescription()));
+        Slide sl = new Slide(SLIDEURL+ui.getName(), ui.getDescription());
         return sl;
     }
     
