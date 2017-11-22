@@ -81,18 +81,18 @@ public class HarjukatuDelegateImpl implements HarjukatuDelegate {
         return ry;
     }
 
-    private Slide toSlide(UploadItem ui) {
-        Slide sl = new Slide(SLIDEURL+ui.getName(), ui.getDescription());
-        return sl;
+    private List<Slide> toSlides(List<UploadItem> items) {
+        List<Slide> slides = new ArrayList<Slide>();
+        for(UploadItem ui : items) {
+            Slide sl = new Slide(SLIDEURL+ui.getName(), ui.getDescription());
+            slides.add(sl);
+        }
+        return slides;
     }
     
     @Override
     public List<Slide> listSlides() {
         List<UploadItem> items = getHarjukatuDAO().listUploads();
-        List<Slide> slides = new ArrayList<Slide>();
-        for(UploadItem ui : items) {
-            slides.add(toSlide(ui));
-        }
-        return slides;
+        return toSlides(items);
     }
 }
