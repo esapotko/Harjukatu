@@ -128,12 +128,14 @@ public class HarjukatuUtil {
         ClamAVClient cl = new ClamAVClient(CLAMHOST, CLAMD, MINUTE);
         byte[] reply = cl.scan(bytes);
         
-        if (!ClamAVClient.isCleanReply(reply)) {
+        if (ClamAVClient.isCleanReply(reply) == false) {
             String msg = "ClamAV found something! REJECT";
             ry.setType(ERROR);
             ry.addMessage(msg);
             logger.warn(msg);
-        } else { // In memory scan done. Safe enough to save.
+        }
+        // Is image and memory scan done. Safe enough to save.
+        if(ry.type == OK) { 
             InputStream in = new ByteArrayInputStream(bytes);
             File fl = new File(FILEPATH, name);
             FileUtils.copyInputStreamToFile(in, fl);
